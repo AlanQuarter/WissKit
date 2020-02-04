@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name          = 'WissKit'
-  spec.version       = '0.0.4'
+  spec.version       = '0.1.0'
   spec.license       = { :type => "MIT", :file => "LICENSE" }
   spec.homepage      = 'https://github.com/AlanQuarter/WissKit'
   spec.authors       = { 'AlanQuarter' => 'the9thstar@naver.com' }
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 #   spec.osx.source_files   = 'Reachability/osx/*.swift'
 
 #   spec.framework      = 'SystemConfiguration'
-#   spec.ios.framework  = 'UIKit'
+  spec.ios.framework  = 'Foundation', 'UIKit'
 #   spec.osx.framework  = 'AppKit'
 
 #   spec.dependency 'SomeOtherPod'
