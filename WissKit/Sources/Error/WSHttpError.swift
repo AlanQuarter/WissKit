@@ -9,6 +9,6 @@ import Foundation
 
 public protocol WSHttpError: WSError {
 
-    var httpStatusCode: Int { get }
+    var httpStatusCode: Int { get set }
 
 }

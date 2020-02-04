@@ -7,36 +7,38 @@
 import Foundation
 
 
-public protocol WSError: LocalizedError {
+public protocol WSError: LocalizedError, CustomStringConvertible {
 
     static var unknown: Self { get }
 
-    var code: Int { get }
-    var message: String? { get }
-
-    init(code: Int, message: String?)
+    var code: Int { get set }
+    var message: String? { get set }
 
 }
 
 
 extension WSError {
 
-    init(_ error: Error) {
-        if let wsError = error as? Self {
-            self.init(code: wsError.code, message: wsError.message)
-        } else {
-            self.init(code: Self.unknown.code, message: error.localizedDescription)
+    public init?(_ error: Error) {
+        guard let wsError = error as? Self else {
+            return nil
         }
+
+        self = wsError
     }
 
 
-    var errorDescription: String? {
+    public var errorDescription: String? {
         self.message
     }
 
+    public var description: String {
+        self.message ?? ""
+    }
 
-    static func ~=(match: Self, error: Error) -> Bool {
-        match.code == Self(error).code
+
+    public static func ~=(match: Self, error: Error) -> Bool {
+        error is Self && match.code == Self(error)?.code
     }
 
 }
