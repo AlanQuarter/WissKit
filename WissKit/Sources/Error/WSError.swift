@@ -11,8 +11,8 @@ public protocol WSError: LocalizedError, CustomStringConvertible {
 
     static var unknown: Self { get }
 
-    var code: Int { get set }
-    var message: String? { get set }
+    var code: Int { get }
+    var message: String? { get }
 
 }
 
