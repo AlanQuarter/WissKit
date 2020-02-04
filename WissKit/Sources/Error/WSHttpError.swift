@@ -7,7 +7,7 @@
 import Foundation
 
 
-protocol WSHttpError: WSError {
+public protocol WSHttpError: WSError {
 
     var httpStatusCode: Int { get }
 
