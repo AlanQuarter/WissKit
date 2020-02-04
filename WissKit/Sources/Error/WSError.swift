@@ -7,7 +7,7 @@
 import Foundation
 
 
-protocol WSError: LocalizedError {
+public protocol WSError: LocalizedError {
 
     static var unknown: Self { get }
 
