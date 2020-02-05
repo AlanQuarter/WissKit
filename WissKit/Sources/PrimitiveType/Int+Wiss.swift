@@ -12,7 +12,7 @@ extension Int: WissCompatible {}
 
 extension Wiss where WissBase == Int {
 
-    var decimalString: String {
+    public var decimalString: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         return formatter.string(for: self.base) ?? "\(self.base)"

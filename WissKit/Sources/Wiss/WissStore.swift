@@ -28,8 +28,17 @@ final class WissStore {
             case .memory:
                 return self.memoryData[key.keyString]
 
-            case .userDefaults:
-                return self.userDefaults?.value(forKey: key.keyString)
+            case .memoryAndUserDefaults:
+                if let value = self.memoryData[key.keyString] {
+                    return value
+                }
+
+                if let value = self.userDefaults?.value(forKey: key.keyString) {
+                    self.memoryData[key.keyString] = value
+                    return value
+                }
+
+                return nil
             }
         }
 
@@ -38,7 +47,8 @@ final class WissStore {
             case .memory:
                 self.memoryData[key.keyString] = newValue
 
-            case .userDefaults:
+            case .memoryAndUserDefaults:
+                self.memoryData[key.keyString] = newValue
                 self.userDefaults?.setValue(newValue, forKey: key.keyString)
             }
         }
@@ -47,10 +57,10 @@ final class WissStore {
 }
 
 
-public enum WissStoreType {
+public indirect enum WissStoreType {
 
     case memory
-    case userDefaults
+    case memoryAndUserDefaults
 
 }
 
