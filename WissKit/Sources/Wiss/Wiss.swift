@@ -7,12 +7,12 @@
 import Foundation
 
 
-public struct Wiss<Base> {
+public struct Wiss<WissBase> {
 
-    public let base: Base
+    public let base: WissBase
 
 
-    public init(_ base: Base) {
+    public init(_ base: WissBase) {
         self.base = base
     }
 
@@ -21,85 +21,29 @@ public struct Wiss<Base> {
 
 extension Wiss {
 
-    public static subscript(key: String) -> Any? {
+    public static subscript<Key: WissStoreKeyExpression>(keyExpression: Key) -> Any? {
         get {
-            WissStore.shared[Base.self, key]
+            WissStore.shared[keyExpression.key(for: WissBase.self)]
         }
 
         set {
-            WissStore.shared[Base.self, key] = newValue
-        }
-    }
-
-
-    public static subscript<E: RawRepresentable>(key: E) -> Any? where E.RawValue == String {
-        get {
-            WissStore.shared[Base.self, key]
-        }
-
-        set {
-            WissStore.shared[Base.self, key] = newValue
+            WissStore.shared[keyExpression.key(for: WissBase.self)] = newValue
         }
     }
 
 }
 
 
-extension Wiss where Base: Hashable {
+extension Wiss where WissBase: Hashable {
 
-    public subscript(key: String) -> Any? {
+    public subscript<Key: WissStoreKeyExpression>(keyExpression: Key) -> Any? {
         get {
-            WissStore.shared[self.base, key]
+            WissStore.shared[keyExpression.key(for: self.base)]
         }
 
         set {
-            WissStore.shared[self.base, key] = newValue
+            WissStore.shared[keyExpression.key(for: self.base)] = newValue
         }
-    }
-
-
-    public subscript<E: RawRepresentable>(key: E) -> Any? where E.RawValue == String {
-        get {
-            WissStore.shared[self.base, key]
-        }
-
-        set {
-            WissStore.shared[self.base, key] = newValue
-        }
-    }
-
-}
-
-
-public protocol WissCompatible {
-
-    associatedtype WissBase
-
-
-    static var ws: Wiss<WissBase>.Type { get set }
-
-    var ws: Wiss<WissBase> { get set }
-
-}
-
-
-extension WissCompatible {
-
-    public static var ws: Wiss<Self>.Type {
-        get {
-            Wiss<Self>.self
-        }
-
-        set {}
-    }
-
-
-    public var ws: Wiss<Self> {
-        get {
-            Wiss(self)
-        }
-
-        set {}
     }
 
 }

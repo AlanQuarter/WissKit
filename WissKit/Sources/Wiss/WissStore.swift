@@ -12,89 +12,85 @@ final class WissStore {
     static let shared = WissStore()
 
 
-    fileprivate var data: [String: Any] = [:]
+    private var memoryData: [String: Any]
+    private let userDefaults: UserDefaults?
 
 
-    private init() {}
+    private init() {
+        self.memoryData = [:]
+        self.userDefaults = UserDefaults(suiteName: "Wiss")
+    }
 
-}
 
-
-extension WissStore {
-
-    subscript<WissBase>(type: WissBase.Type, key: String) -> Any? {
+    subscript(key: WissStoreKey) -> Any? {
         get {
-            self.data[self.keyPath(forType: type, key: key)]
+            switch key.storeType {
+            case .memory:
+                return self.memoryData[key.keyString]
+
+            case .userDefaults:
+                return self.userDefaults?.value(forKey: key.keyString)
+            }
         }
 
         set {
-            self.data[self.keyPath(forType: type, key: key)] = newValue
+            switch key.storeType {
+            case .memory:
+                self.memoryData[key.keyString] = newValue
+
+            case .userDefaults:
+                self.userDefaults?.setValue(newValue, forKey: key.keyString)
+            }
         }
-    }
-
-
-    private func keyPath<WissBase>(forType type: WissBase, key: String) -> String {
-        "\(type).\(key)"
-    }
-
-}
-
-
-extension WissStore {
-
-    subscript<WissBase, E: RawRepresentable>(type: WissBase.Type, key: E) -> Any? where E.RawValue == String {
-        get {
-            self.data[self.keyPath(forType: type, key: key)]
-        }
-
-        set {
-            self.data[self.keyPath(forType: type, key: key)] = newValue
-        }
-    }
-
-
-    private func keyPath<WissBase, E: RawRepresentable>(forType type: WissBase, key: E) -> String where E.RawValue == String {
-        "\(type).\(key.rawValue)"
     }
 
 }
 
 
-extension WissStore {
+public enum WissStoreType {
 
-    subscript<WissBase: Hashable>(instance: WissBase, key: String) -> Any? {
-        get {
-            self.data[self.keyPath(forInstance: instance, key: key)]
-        }
+    case memory
+    case userDefaults
 
-        set {
-            self.data[self.keyPath(forInstance: instance, key: key)] = newValue
-        }
+}
+
+
+struct WissStoreKey {
+
+    let storeType: WissStoreType
+    let keyString: String
+
+
+    init<WissBase>(storeType: WissStoreType, type: WissBase.Type, keyName: String) {
+        self.storeType = storeType
+        self.keyString = "\(type).\(keyName)"
     }
 
 
-    private func keyPath<WissBase: Hashable>(forInstance instance: WissBase, key: String) -> String {
-        "\(instance.hashValue).\(key)"
+    init<WissBase: Hashable>(storeType: WissStoreType, instance: WissBase, keyName: String) {
+        self.storeType = storeType
+        self.keyString = "\(type(of: instance)).\(instance.hashValue).\(keyName)"
     }
 
 }
 
 
-extension WissStore {
+public protocol WissStoreKeyExpression: RawRepresentable where Self.RawValue == String {
 
-    subscript<WissBase: Hashable, E: RawRepresentable>(instance: WissBase, key: E) -> Any? where E.RawValue == String {
-        get {
-            self.data[self.keyPath(forInstance: instance, key: key)]
-        }
+    var storeType: WissStoreType { get }
 
-        set {
-            self.data[self.keyPath(forInstance: instance, key: key)] = newValue
-        }
+}
+
+
+extension WissStoreKeyExpression {
+
+    func key<WissBase>(for type: WissBase.Type) -> WissStoreKey {
+        WissStoreKey(storeType: self.storeType, type: type, keyName: self.rawValue)
     }
 
 
-    private func keyPath<WissBase: Hashable, E: RawRepresentable>(forInstance instance: WissBase, key: E) -> String where E.RawValue == String {
-        "\(instance.hashValue).\(key.rawValue)"
+    func key<WissBase: Hashable>(for instance: WissBase) -> WissStoreKey {
+        WissStoreKey(storeType: self.storeType, instance: instance, keyName: self.rawValue)
     }
 
 }
