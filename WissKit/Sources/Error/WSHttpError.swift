@@ -7,6 +7,7 @@
 import Foundation
 
 
+@available(*, deprecated, message: "Use WissHttpError.")
 public protocol WSHttpError: WSError {
 
     var httpStatusCode: Int { get }

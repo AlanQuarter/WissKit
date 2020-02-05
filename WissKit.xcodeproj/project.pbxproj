@@ -13,8 +13,10 @@
 		2DB994D3E8201672362CEFBF /* Int+Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99A163EF086D3061C8DAE /* Int+Wiss.swift */; };
 		2DB9951E5CACC70F8A61D2F0 /* String+Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB993883AC8BAEEC2575258 /* String+Wiss.swift */; };
 		2DB99673DCE2037AAAF84688 /* WSHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998C5FCF60B899503706F /* WSHttpError.swift */; };
+		2DB99867951425D429AFF82D /* WissError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998DFC29FC7E1BF78A02C /* WissError.swift */; };
 		2DB999CFDCC7BE1B75FB5D74 /* WissStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D0A5E74C109D9A46B66 /* WissStore.swift */; };
 		2DB99A5D8987B369F7D8B75E /* Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D065DA99E2E2D115C30 /* Wiss.swift */; };
+		2DB99ED33720E1D286C5A961 /* WissHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99A46B8A441739AF5265C /* WissHttpError.swift */; };
 		E71C3C6523E960EB00CE2B47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C3C6423E960EB00CE2B47 /* AppDelegate.swift */; };
 		E71C3C6923E960EB00CE2B47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C3C6823E960EB00CE2B47 /* ViewController.swift */; };
 		E71C3C6E23E960EE00CE2B47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E71C3C6D23E960EE00CE2B47 /* Assets.xcassets */; };
@@ -26,7 +28,9 @@
 		2DB99591647EB850C8ED5836 /* WissKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = WissKit.podspec; sourceTree = SOURCE_ROOT; };
 		2DB99622F2D0C570D8D3C65D /* WSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSError.swift; sourceTree = "<group>"; };
 		2DB998C5FCF60B899503706F /* WSHttpError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSHttpError.swift; sourceTree = "<group>"; };
+		2DB998DFC29FC7E1BF78A02C /* WissError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissError.swift; sourceTree = "<group>"; };
 		2DB99A163EF086D3061C8DAE /* Int+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Wiss.swift"; sourceTree = "<group>"; };
+		2DB99A46B8A441739AF5265C /* WissHttpError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissHttpError.swift; sourceTree = "<group>"; };
 		2DB99C7EF06A4A3B54FED832 /* WissCompatible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissCompatible.swift; sourceTree = "<group>"; };
 		2DB99D065DA99E2E2D115C30 /* Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wiss.swift; sourceTree = "<group>"; };
 		2DB99D0A5E74C109D9A46B66 /* WissStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissStore.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 			children = (
 				2DB99622F2D0C570D8D3C65D /* WSError.swift */,
 				2DB998C5FCF60B899503706F /* WSHttpError.swift */,
+				2DB998DFC29FC7E1BF78A02C /* WissError.swift */,
+				2DB99A46B8A441739AF5265C /* WissHttpError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -196,6 +202,8 @@
 				2DB9951E5CACC70F8A61D2F0 /* String+Wiss.swift in Sources */,
 				2DB999CFDCC7BE1B75FB5D74 /* WissStore.swift in Sources */,
 				2DB990B3CB37493418053735 /* WissCompatible.swift in Sources */,
+				2DB99867951425D429AFF82D /* WissError.swift in Sources */,
+				2DB99ED33720E1D286C5A961 /* WissHttpError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
