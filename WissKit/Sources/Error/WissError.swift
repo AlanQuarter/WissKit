@@ -35,7 +35,7 @@ extension WissError {
     }
 
 
-    public static func ~=(match: Self, error: Error) -> Bool {
+    public static func ~= (match: Self, error: Error) -> Bool {
         error is Self && match.code == Self(error)?.code
     }
 
