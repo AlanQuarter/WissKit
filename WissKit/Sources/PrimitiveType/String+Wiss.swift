@@ -18,7 +18,7 @@ extension Wiss where WissBase == String {
         }
 
         set {
-            Self[Key.defaultLocalizationLanguage] = newValue
+            Self[Key.defaultLocalizationLanguage] = newValue as Any
         }
     }
 

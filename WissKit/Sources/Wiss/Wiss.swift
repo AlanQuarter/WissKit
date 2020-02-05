@@ -43,7 +43,7 @@ extension Wiss {
     }
 
 
-    public static subscript<K: WissStoreKeyExpression>(keyExpression: K) -> Any {
+    public static subscript<K: WissStoreKeyExpression>(keyExpression: K) -> Any? {
         get {
             WissStore.shared[keyExpression.key(for: WissBase.self)]
         }
