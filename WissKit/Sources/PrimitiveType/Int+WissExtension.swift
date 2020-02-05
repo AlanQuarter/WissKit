@@ -9,12 +9,12 @@ import Foundation
 
 extension Int {
 
-    init(_ source: Bool) {
+    public init(_ source: Bool) {
         self.init(source == true ? 1 : 0)
     }
 
 
-    init?(_ source: Bool?) {
+    public init?(_ source: Bool?) {
         guard let actualSource = source else {
             return nil
         }
