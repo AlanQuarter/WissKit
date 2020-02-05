@@ -1,5 +1,5 @@
 //
-// Created by Alan on 2020/02/04.
+// Created by Alan on 2020/02/06.
 // Copyright (c) 2020 Wiss. All rights reserved.
 //
 
@@ -7,10 +7,7 @@
 import Foundation
 
 
-@available(*, deprecated, message: "Use WissError.")
-public protocol WSError: LocalizedError, CustomStringConvertible {
-
-    static var unknown: Self { get }
+public protocol WissError: LocalizedError, CustomStringConvertible {
 
     var code: Int { get }
     var message: String? { get }
@@ -18,15 +15,14 @@ public protocol WSError: LocalizedError, CustomStringConvertible {
 }
 
 
-@available(*, deprecated, message: "Use WissError.")
-extension WSError {
+extension WissError {
 
     public init?(_ error: Error) {
-        guard let wsError = error as? Self else {
+        guard let wissError = error as? Self else {
             return nil
         }
 
-        self = wsError
+        self = wissError
     }
 
 
@@ -39,7 +35,7 @@ extension WSError {
     }
 
 
-    public static func ~=(match: Self, error: Error) -> Bool {
+    public static func ~= (match: Self, error: Error) -> Bool {
         error is Self && match.code == Self(error)?.code
     }
 
