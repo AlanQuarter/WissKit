@@ -27,11 +27,11 @@ extension WissError {
 
 
     public var errorDescription: String? {
-        self.message
+        self.message?.wiss.localized
     }
 
     public var description: String {
-        self.message ?? ""
+        self.errorDescription ?? ""
     }
 
 
