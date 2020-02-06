@@ -22,20 +22,20 @@ final class WissStore {
     }
 
 
-    subscript(key: WissStoreKey) -> Any? {
+    subscript<T>(key: WissStoreKey) -> T? {
         get {
             switch key.storeType {
             case .memory:
-                return self.memoryData[key.keyString]
+                return self.memoryData[key.keyString] as? T
 
             case .memoryAndUserDefaults:
                 if let value = self.memoryData[key.keyString] {
-                    return value
+                    return value as? T
                 }
 
                 if let value = self.userDefaults?.value(forKey: key.keyString) {
                     self.memoryData[key.keyString] = value
-                    return value
+                    return value as? T
                 }
 
                 return nil

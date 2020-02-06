@@ -21,7 +21,7 @@ public struct Wiss<WissBase> {
 
 extension Wiss {
 
-    public static subscript(storeType: WissStoreType, keyName: String) -> Any? {
+    public static subscript<T>(storeType: WissStoreType, keyName: String) -> T? {
         get {
             WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyName)]
         }
@@ -32,7 +32,7 @@ extension Wiss {
     }
 
 
-    public static subscript<E: RawRepresentable>(storeType: WissStoreType, keyDescription: E) -> Any? where E.RawValue == String {
+    public static subscript<E: RawRepresentable, T>(storeType: WissStoreType, keyDescription: E) -> T? where E.RawValue == String {
         get {
             WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyDescription.rawValue)]
         }
@@ -43,7 +43,7 @@ extension Wiss {
     }
 
 
-    public static subscript<K: WissStoreKeyExpression>(keyExpression: K) -> Any? {
+    public static subscript<K: WissStoreKeyExpression, T>(keyExpression: K) -> T? {
         get {
             WissStore.shared[keyExpression.key(for: WissBase.self)]
         }
@@ -58,7 +58,7 @@ extension Wiss {
 
 extension Wiss where WissBase: Hashable {
 
-    public subscript(storeType: WissStoreType, keyName: String) -> Any? {
+    public subscript<T>(storeType: WissStoreType, keyName: String) -> T? {
         get {
             WissStore.shared[WissStoreKey(storeType: storeType, instance: self.base, keyName: keyName)]
         }
@@ -69,7 +69,7 @@ extension Wiss where WissBase: Hashable {
     }
 
 
-    public subscript<E: RawRepresentable>(storeType: WissStoreType, keyDescription: E) -> Any? where E.RawValue == String {
+    public subscript<E: RawRepresentable, T>(storeType: WissStoreType, keyDescription: E) -> T? where E.RawValue == String {
         get {
             WissStore.shared[WissStoreKey(storeType: storeType, instance: self.base, keyName: keyDescription.rawValue)]
         }
@@ -80,7 +80,7 @@ extension Wiss where WissBase: Hashable {
     }
 
 
-    public subscript<K: WissStoreKeyExpression>(keyExpression: K) -> Any? {
+    public subscript<K: WissStoreKeyExpression, T>(keyExpression: K) -> T? {
         get {
             WissStore.shared[keyExpression.key(for: self.base)]
         }

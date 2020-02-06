@@ -14,16 +14,16 @@ extension Wiss where WissBase == String {
 
     public static var defaultLocalizationLanguage: String? {
         get {
-            Self[Key.defaultLocalizationLanguage] as? String
+            Self[Key.defaultLocalizationLanguage] as String?
         }
 
         set {
-            Self[Key.defaultLocalizationLanguage] = newValue as Any
+            Self[Key.defaultLocalizationLanguage] = newValue
         }
     }
 
     private static var defaultLocalizationBundle: Bundle? {
-        if let bundle = Self[Key.defaultLocalizationBundle] as? Bundle {
+        if let bundle = Self[Key.defaultLocalizationBundle] as Bundle? {
             return bundle
         }
 
