@@ -10,10 +10,14 @@ import Foundation
 public struct Wiss<WissBase> {
 
     public let base: WissBase
+    private let deinitHandler: WissDeinitHandler
 
 
     public init(_ base: WissBase) {
         self.base = base
+        self.deinitHandler = WissDeinitHandler {
+            WissStore.shared.flush(for: base)
+        }
     }
 
 }
@@ -56,7 +60,7 @@ extension Wiss {
 }
 
 
-extension Wiss where WissBase: Hashable {
+extension Wiss where WissBase: WissInstanceIdentifiable {
 
     public subscript<T>(storeType: WissStoreType, keyName: String) -> T? {
         get {

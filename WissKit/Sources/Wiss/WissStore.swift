@@ -54,10 +54,24 @@ final class WissStore {
         }
     }
 
+
+    func flush<WissBase>(for instance: WissBase) {
+        guard let prefix = try? WissStoreKey.prefix(for: instance) else {
+            return
+        }
+
+        let keyList = self.memoryData.keys.filter { $0.hasPrefix(prefix) }
+
+        for key in keyList {
+            self.memoryData[key] = nil
+            self.userDefaults?.removeObject(forKey: key)
+        }
+    }
+
 }
 
 
-public indirect enum WissStoreType {
+public enum WissStoreType {
 
     case memory
     case memoryAndUserDefaults
@@ -77,9 +91,22 @@ struct WissStoreKey {
     }
 
 
-    init<WissBase: Hashable>(storeType: WissStoreType, instance: WissBase, keyName: String) {
-        self.storeType = storeType
-        self.keyString = "\(type(of: instance)).\(instance.hashValue).\(keyName)"
+    init<WissBase: WissInstanceIdentifiable>(storeType: WissStoreType, instance: WissBase, keyName: String) {
+        do {
+            self.storeType = storeType
+            self.keyString = "\(try Self.prefix(for: instance)).\(keyName)"
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
+
+    fileprivate static func prefix<WissBase>(for instance: WissBase) throws -> String {
+        guard let instanceIdentifiable = instance as? WissInstanceIdentifiable else {
+            throw WissKitError.notInstanceIdentifiable
+        }
+
+        return "\(type(of: instance)).\(instanceIdentifiable.wissInstanceId)"
     }
 
 }
@@ -99,7 +126,7 @@ extension WissStoreKeyExpression {
     }
 
 
-    func key<WissBase: Hashable>(for instance: WissBase) -> WissStoreKey {
+    func key<WissBase: WissInstanceIdentifiable>(for instance: WissBase) -> WissStoreKey {
         WissStoreKey(storeType: self.storeType, instance: instance, keyName: self.rawValue)
     }
 
