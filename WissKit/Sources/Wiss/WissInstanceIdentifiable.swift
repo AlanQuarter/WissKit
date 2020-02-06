@@ -9,14 +9,14 @@ import Foundation
 
 public protocol WissInstanceIdentifiable {
 
-    var wissInstanceId: String { get }
+    var wiss_InstanceId: String { get }
 
 }
 
 
 extension Hashable {
 
-    public var wissInstanceId: String {
+    public var wiss_InstanceId: String {
         "\(self.hashValue)"
     }
 

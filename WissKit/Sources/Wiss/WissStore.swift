@@ -48,8 +48,16 @@ final class WissStore {
                 self.memoryData[key.keyString] = newValue
 
             case .memoryAndUserDefaults:
+                if let oldValue = self[key] as WissEquatable? {
+                    guard oldValue.wiss_isEqual(to: newValue) == false else {
+                        print("passed!!!")
+                        return
+                    }
+                }
+
                 self.memoryData[key.keyString] = newValue
                 self.userDefaults?.setValue(newValue, forKey: key.keyString)
+                print("stored!!!")
             }
         }
     }
@@ -106,7 +114,7 @@ struct WissStoreKey {
             throw WissKitError.notInstanceIdentifiable
         }
 
-        return "\(type(of: instance)).\(instanceIdentifiable.wissInstanceId)"
+        return "\(type(of: instance)).\(instanceIdentifiable.wiss_InstanceId)"
     }
 
 }

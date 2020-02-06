@@ -18,6 +18,7 @@
 		2DB99524E8DE83F29215CB11 /* WissKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99E33E161B869DDA6B4A8 /* WissKitError.swift */; };
 		2DB995E2B4AEBF0466AAD20D /* WissDeinitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99E88BD9678E9318E0D9F /* WissDeinitHandler.swift */; };
 		2DB99673DCE2037AAAF84688 /* WSHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998C5FCF60B899503706F /* WSHttpError.swift */; };
+		2DB99755D8ECA5683AD07147 /* WissEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99547806DC6878288B60C /* WissEquatable.swift */; };
 		2DB99867951425D429AFF82D /* WissError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998DFC29FC7E1BF78A02C /* WissError.swift */; };
 		2DB999CFDCC7BE1B75FB5D74 /* WissStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D0A5E74C109D9A46B66 /* WissStore.swift */; };
 		2DB99A5D8987B369F7D8B75E /* Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D065DA99E2E2D115C30 /* Wiss.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		2DB9935328595889212F9646 /* WissInstanceIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissInstanceIdentifiable.swift; sourceTree = "<group>"; };
 		2DB993883AC8BAEEC2575258 /* String+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Wiss.swift"; sourceTree = "<group>"; };
+		2DB99547806DC6878288B60C /* WissEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissEquatable.swift; sourceTree = "<group>"; };
 		2DB99591647EB850C8ED5836 /* WissKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = WissKit.podspec; sourceTree = SOURCE_ROOT; };
 		2DB99622F2D0C570D8D3C65D /* WSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSError.swift; sourceTree = "<group>"; };
 		2DB998C5FCF60B899503706F /* WSHttpError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSHttpError.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				2DB99D0A5E74C109D9A46B66 /* WissStore.swift */,
 				2DB99C7EF06A4A3B54FED832 /* WissCompatible.swift */,
 				2DB9935328595889212F9646 /* WissInstanceIdentifiable.swift */,
+				2DB99547806DC6878288B60C /* WissEquatable.swift */,
 			);
 			path = Wiss;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				2DB992D6826E81511A948587 /* WissInstanceIdentifiable.swift in Sources */,
 				2DB995E2B4AEBF0466AAD20D /* WissDeinitHandler.swift in Sources */,
 				2DB99524E8DE83F29215CB11 /* WissKitError.swift in Sources */,
+				2DB99755D8ECA5683AD07147 /* WissEquatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
