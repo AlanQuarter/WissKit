@@ -14,16 +14,16 @@ extension Wiss where WissBase == String {
 
     public static var defaultLocalizationLanguage: String? {
         get {
-            Self[Key.defaultLocalizationLanguage] as String?
+            Self[StaticValueKey.defaultLocalizationLanguage] as String?
         }
 
         set {
-            Self[Key.defaultLocalizationLanguage] = newValue
+            Self[StaticValueKey.defaultLocalizationLanguage] = newValue
         }
     }
 
     private static var defaultLocalizationBundle: Bundle? {
-        if let bundle = Self[Key.defaultLocalizationBundle] as Bundle? {
+        if let bundle = Self[StaticValueKey.defaultLocalizationBundle] as Bundle? {
             return bundle
         }
 
@@ -33,7 +33,7 @@ extension Wiss where WissBase == String {
             return nil
         }
 
-        Self[Key.defaultLocalizationBundle] = bundle
+        Self[StaticValueKey.defaultLocalizationBundle] = bundle
         return bundle
     }
 
@@ -66,7 +66,7 @@ extension Wiss where WissBase == String {
 
 extension Wiss where WissBase == String {
 
-    enum Key: String, WissStoreKeyExpression {
+    enum StaticValueKey: String, WissStoreStaticValueKeyExpression {
 
         case defaultLocalizationBundle
         case defaultLocalizationLanguage

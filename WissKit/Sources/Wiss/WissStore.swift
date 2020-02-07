@@ -63,7 +63,7 @@ final class WissStore {
     }
 
 
-    func flush<WissBase>(for instance: WissBase) {
+    func flushIfNeeded<WissBase>(for instance: WissBase) {
         guard let prefix = try? WissStoreKey.prefix(for: instance) else {
             return
         }
@@ -72,7 +72,6 @@ final class WissStore {
 
         for key in keyList {
             self.memoryData[key] = nil
-            self.userDefaults?.removeObject(forKey: key)
         }
     }
 
@@ -99,9 +98,9 @@ struct WissStoreKey {
     }
 
 
-    init<WissBase: WissInstanceIdentifiable>(storeType: WissStoreType, instance: WissBase, keyName: String) {
+    init<WissBase: InstanceIdentifiable>(instance: WissBase, keyName: String) {
         do {
-            self.storeType = storeType
+            self.storeType = .memory
             self.keyString = "\(try Self.prefix(for: instance)).\(keyName)"
         } catch {
             fatalError(error.localizedDescription)
@@ -110,32 +109,39 @@ struct WissStoreKey {
 
 
     fileprivate static func prefix<WissBase>(for instance: WissBase) throws -> String {
-        guard let instanceIdentifiable = instance as? WissInstanceIdentifiable else {
+        guard let instanceIdentifiable = instance as? InstanceIdentifiable else {
             throw WissKitError.notInstanceIdentifiable
         }
 
-        return "\(type(of: instance)).\(instanceIdentifiable.wiss_InstanceId)"
+        return "\(type(of: instance)).\(instanceIdentifiable.wiss_instanceId)"
     }
 
 }
 
 
-public protocol WissStoreKeyExpression: RawRepresentable where Self.RawValue == String {
+public protocol WissStoreInstantValueKeyExpression: RawRepresentable where Self.RawValue == String {}
+
+
+extension WissStoreInstantValueKeyExpression {
+
+    func key<WissBase: InstanceIdentifiable>(for instance: WissBase) -> WissStoreKey {
+        WissStoreKey(instance: instance, keyName: self.rawValue)
+    }
+
+}
+
+
+public protocol WissStoreStaticValueKeyExpression: WissStoreInstantValueKeyExpression {
 
     var storeType: WissStoreType { get }
 
 }
 
 
-extension WissStoreKeyExpression {
+extension WissStoreStaticValueKeyExpression {
 
     func key<WissBase>(for type: WissBase.Type) -> WissStoreKey {
         WissStoreKey(storeType: self.storeType, type: type, keyName: self.rawValue)
-    }
-
-
-    func key<WissBase: WissInstanceIdentifiable>(for instance: WissBase) -> WissStoreKey {
-        WissStoreKey(storeType: self.storeType, instance: instance, keyName: self.rawValue)
     }
 
 }
