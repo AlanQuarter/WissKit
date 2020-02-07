@@ -38,22 +38,11 @@ extension Wiss {
 
     public static subscript<E: RawRepresentable, T>(storeType: WissStoreType, keyDescription: E) -> T? where E.RawValue == String {
         get {
-            WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyDescription.rawValue)]
+            Self[storeType, keyDescription.rawValue]
         }
 
         set {
-            WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyDescription.rawValue)] = newValue
-        }
-    }
-
-
-    public static subscript<K: WissStoreStaticValueKeyExpression, T>(keyExpression: K) -> T? {
-        get {
-            WissStore.shared[keyExpression.key(for: WissBase.self)]
-        }
-
-        set {
-            WissStore.shared[keyExpression.key(for: WissBase.self)] = newValue
+            Self[storeType, keyDescription.rawValue] = newValue
         }
     }
 
@@ -73,24 +62,13 @@ extension Wiss where WissBase: InstanceIdentifiable {
     }
 
 
-    public subscript<E: RawRepresentable, T>(storeType: WissStoreType, keyDescription: E) -> T? where E.RawValue == String {
+    public subscript<E: RawRepresentable, T>(keyDescription: E) -> T? where E.RawValue == String {
         get {
-            WissStore.shared[WissStoreKey(instance: self.base, keyName: keyDescription.rawValue)]
+            self[keyDescription.rawValue]
         }
 
         set {
-            WissStore.shared[WissStoreKey(instance: self.base, keyName: keyDescription.rawValue)] = newValue
-        }
-    }
-
-
-    public subscript<K: WissStoreInstantValueKeyExpression, T>(keyExpression: K) -> T? {
-        get {
-            WissStore.shared[keyExpression.key(for: self.base)]
-        }
-
-        set {
-            WissStore.shared[keyExpression.key(for: self.base)] = newValue
+            self[keyDescription.rawValue] = newValue
         }
     }
 

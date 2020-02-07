@@ -50,14 +50,12 @@ final class WissStore {
             case .memoryAndUserDefaults:
                 if let oldValue = self[key] as WissEquatable? {
                     guard oldValue.wiss_isEqual(to: newValue) == false else {
-                        print("passed!!!")
                         return
                     }
                 }
 
                 self.memoryData[key.keyString] = newValue
                 self.userDefaults?.setValue(newValue, forKey: key.keyString)
-                print("stored!!!")
             }
         }
     }
@@ -114,34 +112,6 @@ struct WissStoreKey {
         }
 
         return "\(type(of: instance)).\(instanceIdentifiable.wiss_instanceId)"
-    }
-
-}
-
-
-public protocol WissStoreInstantValueKeyExpression: RawRepresentable where Self.RawValue == String {}
-
-
-extension WissStoreInstantValueKeyExpression {
-
-    func key<WissBase: InstanceIdentifiable>(for instance: WissBase) -> WissStoreKey {
-        WissStoreKey(instance: instance, keyName: self.rawValue)
-    }
-
-}
-
-
-public protocol WissStoreStaticValueKeyExpression: WissStoreInstantValueKeyExpression {
-
-    var storeType: WissStoreType { get }
-
-}
-
-
-extension WissStoreStaticValueKeyExpression {
-
-    func key<WissBase>(for type: WissBase.Type) -> WissStoreKey {
-        WissStoreKey(storeType: self.storeType, type: type, keyName: self.rawValue)
     }
 
 }
