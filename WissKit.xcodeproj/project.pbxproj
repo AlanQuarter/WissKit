@@ -21,6 +21,7 @@
 		2DB99867951425D429AFF82D /* WissError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998DFC29FC7E1BF78A02C /* WissError.swift */; };
 		2DB999CFDCC7BE1B75FB5D74 /* WissStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D0A5E74C109D9A46B66 /* WissStore.swift */; };
 		2DB99A5D8987B369F7D8B75E /* Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D065DA99E2E2D115C30 /* Wiss.swift */; };
+		2DB99D090A0A6F6E084FC8BE /* CGSize+WissExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99CF6DBC12F398B0FEECD /* CGSize+WissExtension.swift */; };
 		2DB99ED33720E1D286C5A961 /* WissHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99A46B8A441739AF5265C /* WissHttpError.swift */; };
 		2DB99FF46539FBB867C7B0F9 /* WissEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB995C8662675C85899C20F /* WissEquatable.swift */; };
 		E71C3C6523E960EB00CE2B47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C3C6423E960EB00CE2B47 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 		2DB99A163EF086D3061C8DAE /* Int+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Wiss.swift"; sourceTree = "<group>"; };
 		2DB99A46B8A441739AF5265C /* WissHttpError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissHttpError.swift; sourceTree = "<group>"; };
 		2DB99C7EF06A4A3B54FED832 /* WissCompatible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissCompatible.swift; sourceTree = "<group>"; };
+		2DB99CF6DBC12F398B0FEECD /* CGSize+WissExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+WissExtension.swift"; sourceTree = "<group>"; };
 		2DB99D065DA99E2E2D115C30 /* Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wiss.swift; sourceTree = "<group>"; };
 		2DB99D0A5E74C109D9A46B66 /* WissStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissStore.swift; sourceTree = "<group>"; };
 		2DB99E88BD9678E9318E0D9F /* WissDeinitHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissDeinitHandler.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				2DB993883AC8BAEEC2575258 /* String+Wiss.swift */,
 				2DB99FD272EA7AC270C114BA /* Int+WissExtension.swift */,
 				2DB99A0CCFEFA3BD2CA9ECC9 /* Bool+WissExtension.swift */,
+				2DB99CF6DBC12F398B0FEECD /* CGSize+WissExtension.swift */,
 			);
 			path = PrimitiveType;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				2DB9959CAAEF59FB1483B528 /* WissKitError.swift in Sources */,
 				2DB993412A2A26C8F97225E6 /* InstanceIdentifiable.swift in Sources */,
 				2DB99FF46539FBB867C7B0F9 /* WissEquatable.swift in Sources */,
+				2DB99D090A0A6F6E084FC8BE /* CGSize+WissExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
