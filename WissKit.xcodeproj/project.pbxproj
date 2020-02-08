@@ -19,10 +19,12 @@
 		2DB995E2B4AEBF0466AAD20D /* WissDeinitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99E88BD9678E9318E0D9F /* WissDeinitHandler.swift */; };
 		2DB99673DCE2037AAAF84688 /* WSHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998C5FCF60B899503706F /* WSHttpError.swift */; };
 		2DB99867951425D429AFF82D /* WissError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998DFC29FC7E1BF78A02C /* WissError.swift */; };
+		2DB998AFE89EAB9AE74C8034 /* CGFloat+WissExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB992D9ADC651D2A3F42072 /* CGFloat+WissExtension.swift */; };
 		2DB999CFDCC7BE1B75FB5D74 /* WissStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D0A5E74C109D9A46B66 /* WissStore.swift */; };
 		2DB99A5D8987B369F7D8B75E /* Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D065DA99E2E2D115C30 /* Wiss.swift */; };
 		2DB99D090A0A6F6E084FC8BE /* CGSize+WissExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99CF6DBC12F398B0FEECD /* CGSize+WissExtension.swift */; };
 		2DB99ED33720E1D286C5A961 /* WissHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99A46B8A441739AF5265C /* WissHttpError.swift */; };
+		2DB99FB86A4E363B043C9B60 /* ScreenSizeBasedCGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D9BDD9249300C1D3E18 /* ScreenSizeBasedCGFloat.swift */; };
 		2DB99FF46539FBB867C7B0F9 /* WissEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB995C8662675C85899C20F /* WissEquatable.swift */; };
 		E71C3C6523E960EB00CE2B47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C3C6423E960EB00CE2B47 /* AppDelegate.swift */; };
 		E71C3C6923E960EB00CE2B47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C3C6823E960EB00CE2B47 /* ViewController.swift */; };
@@ -31,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DB992D9ADC651D2A3F42072 /* CGFloat+WissExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+WissExtension.swift"; sourceTree = "<group>"; };
 		2DB993883AC8BAEEC2575258 /* String+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Wiss.swift"; sourceTree = "<group>"; };
 		2DB994121D040829B03C1A67 /* InstanceIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanceIdentifiable.swift; sourceTree = "<group>"; };
 		2DB99591647EB850C8ED5836 /* WissKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = WissKit.podspec; sourceTree = SOURCE_ROOT; };
@@ -45,6 +48,7 @@
 		2DB99CF6DBC12F398B0FEECD /* CGSize+WissExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+WissExtension.swift"; sourceTree = "<group>"; };
 		2DB99D065DA99E2E2D115C30 /* Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wiss.swift; sourceTree = "<group>"; };
 		2DB99D0A5E74C109D9A46B66 /* WissStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissStore.swift; sourceTree = "<group>"; };
+		2DB99D9BDD9249300C1D3E18 /* ScreenSizeBasedCGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSizeBasedCGFloat.swift; sourceTree = "<group>"; };
 		2DB99E88BD9678E9318E0D9F /* WissDeinitHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissDeinitHandler.swift; sourceTree = "<group>"; };
 		2DB99E95BCDD63265C0A46C4 /* WissKitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissKitError.swift; sourceTree = "<group>"; };
 		2DB99FD272EA7AC270C114BA /* Int+WissExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+WissExtension.swift"; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				2DB99E88BD9678E9318E0D9F /* WissDeinitHandler.swift */,
+				2DB99D9BDD9249300C1D3E18 /* ScreenSizeBasedCGFloat.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 				2DB99FD272EA7AC270C114BA /* Int+WissExtension.swift */,
 				2DB99A0CCFEFA3BD2CA9ECC9 /* Bool+WissExtension.swift */,
 				2DB99CF6DBC12F398B0FEECD /* CGSize+WissExtension.swift */,
+				2DB992D9ADC651D2A3F42072 /* CGFloat+WissExtension.swift */,
 			);
 			path = PrimitiveType;
 			sourceTree = "<group>";
@@ -272,6 +278,8 @@
 				2DB993412A2A26C8F97225E6 /* InstanceIdentifiable.swift in Sources */,
 				2DB99FF46539FBB867C7B0F9 /* WissEquatable.swift in Sources */,
 				2DB99D090A0A6F6E084FC8BE /* CGSize+WissExtension.swift in Sources */,
+				2DB99FB86A4E363B043C9B60 /* ScreenSizeBasedCGFloat.swift in Sources */,
+				2DB998AFE89EAB9AE74C8034 /* CGFloat+WissExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

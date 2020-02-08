@@ -12,58 +12,25 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
 
-}
+        let oldStyleMargin: CGFloat
 
+        if UIScreen.main.bounds.width < 640,
+           UIScreen.main.bounds.height < 1280 {
+            oldStyleMargin = 14
+        } else if UIScreen.main.bounds.width == 320 {
+            oldStyleMargin = 10
+        } else {
+            oldStyleMargin = 16
+        }
 
-public struct RenderingSize {
+        let brandNewMargin = CGFloat(16) { picker in
+            picker.width(<, 640).height(<, 1280).replace(to: 14)
+            picker.width(==, 320).replace(to: 10)
+        }
 
-    public let width: CGFloat
-    public let height: CGFloat
-
-
-    init(width: CGFloat, height: CGFloat) {
-        self.width = width
-        self.height = height
-    }
-
-
-    init(size: CGSize) {
-        self.width = size.width
-        self.height = size.height
-    }
-
-}
-
-
-public struct RenderingSizeConstraints {
-
-    var width: (CGFloat) -> Bool
-    var height: (CGFloat) -> Bool
-
-
-    init(widthConstraints: @escaping (CGFloat) -> Bool = { _ in true }, heightConstraints: @escaping (CGFloat) -> Bool = { _ in true }) {
-        self.width = widthConstraints
-        self.height = heightConstraints
-    }
-
-}
-
-
-public class RenderingSizeConstraintsMaker {
-
-    var constraints = RenderingSizeConstraints()
-
-    func width(_ relation: @escaping (CGFloat, CGFloat) -> Bool, _ value: CGFloat) -> Self {
-        self.constraints.width = { relation($0, value) }
-        return self
-    }
-
-
-    func height(_ relation: @escaping (CGFloat, CGFloat) -> Bool, _ value: CGFloat) -> Self {
-        self.constraints.width = { relation($0, value) }
-        return self
+        print(brandNewMargin)
+        print(oldStyleMargin == brandNewMargin)
     }
 
 }
