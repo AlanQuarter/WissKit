@@ -10,7 +10,7 @@ import UIKit
 
 public class ScreenSizeBasedCGFloat {
 
-    private let picker: ScreenSizeBasedCGFloatPicker
+    private weak var picker: ScreenSizeBasedCGFloatPicker?
     public let constraints: (CGSize) -> Bool
     public private(set) var value = CGFloat.zero
 
@@ -22,7 +22,11 @@ public class ScreenSizeBasedCGFloat {
 
 
     public func width(_ relation: @escaping (CGFloat, CGFloat) -> Bool, _ criteria: CGFloat) -> ScreenSizeBasedCGFloat {
-        ScreenSizeBasedCGFloat(for: self.picker) { [weak self] size in
+        guard let picker = self.picker else {
+            return self
+        }
+
+        return ScreenSizeBasedCGFloat(for: picker) { [weak self] size in
             var result = true
 
             if let previous = self?.constraints(size) {
@@ -36,7 +40,11 @@ public class ScreenSizeBasedCGFloat {
 
 
     public func height(_ relation: @escaping (CGFloat, CGFloat) -> Bool, _ criteria: CGFloat) -> ScreenSizeBasedCGFloat {
-        ScreenSizeBasedCGFloat(for: self.picker) { [weak self] size in
+        guard let picker = self.picker else {
+            return self
+        }
+
+        return ScreenSizeBasedCGFloat(for: picker) { [weak self] size in
             var result = true
 
             if let previous = self?.constraints(size) {
@@ -51,7 +59,7 @@ public class ScreenSizeBasedCGFloat {
 
     public func replace(to value: CGFloat) {
         self.value = value
-        self.picker.append(self)
+        self.picker?.append(self)
     }
 
 }
