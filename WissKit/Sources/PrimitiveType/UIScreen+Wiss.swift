@@ -13,7 +13,7 @@ extension UIScreen: WissCompatible {}
 
 extension Wiss where WissBase: UIScreen {
 
-    var onePixel: CGFloat {
+    public var onePixel: CGFloat {
         1 / self.base.scale
     }
 

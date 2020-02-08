@@ -10,7 +10,7 @@ import UIKit
 
 extension CGSize {
 
-    init(sideLengthOfSquare length: CGFloat) {
+    public init(sideLengthOfSquare length: CGFloat) {
         self.init(width: length, height: length)
     }
 
