@@ -39,6 +39,11 @@ public class ScreenSizeBasedCGFloat {
     }
 
 
+    public func width(_ constraint: ScreenSizeWidthConstraint) -> ScreenSizeBasedCGFloat {
+        self.width({ width, _ in constraint.check(width) }, 0)
+    }
+
+
     public func height(_ relation: @escaping (CGFloat, CGFloat) -> Bool, _ criteria: CGFloat) -> ScreenSizeBasedCGFloat {
         guard let picker = self.picker else {
             return self
@@ -54,6 +59,11 @@ public class ScreenSizeBasedCGFloat {
             result = result && relation(size.height, criteria)
             return result
         }
+    }
+
+
+    public func height(_ constraint: ScreenSizeHeightConstraint) -> ScreenSizeBasedCGFloat {
+        self.height({ height, _ in constraint.check(height) }, 0)
     }
 
 
@@ -81,8 +91,18 @@ public class ScreenSizeBasedCGFloatPicker {
     }
 
 
+    public func width(_ constraint: ScreenSizeWidthConstraint) -> ScreenSizeBasedCGFloat {
+        self.width({ width, _ in constraint.check(width) }, 0)
+    }
+
+
     public func height(_ relation: @escaping (CGFloat, CGFloat) -> Bool, _ criteria: CGFloat) -> ScreenSizeBasedCGFloat {
         ScreenSizeBasedCGFloat(for: self) { relation($0.height, criteria) }
+    }
+
+
+    public func height(_ constraint: ScreenSizeHeightConstraint) -> ScreenSizeBasedCGFloat {
+        self.height({ height, _ in constraint.check(height) }, 0)
     }
 
 
@@ -96,5 +116,19 @@ public class ScreenSizeBasedCGFloatPicker {
     fileprivate func append(_ alternative: ScreenSizeBasedCGFloat) {
         self.alternativeList.append(alternative)
     }
+
+}
+
+
+public struct ScreenSizeWidthConstraint {
+
+    let check: (CGFloat) -> Bool
+
+}
+
+
+public struct ScreenSizeHeightConstraint {
+
+    let check: (CGFloat) -> Bool
 
 }
