@@ -22,6 +22,7 @@ extension Wiss where WissBase == String {
         }
     }
 
+
     private static var defaultLocalizationBundle: Bundle? {
         if let bundle = Self[.memory, Key.defaultLocalizationBundle] as Bundle? {
             return bundle
@@ -36,6 +37,7 @@ extension Wiss where WissBase == String {
         Self[.memory, Key.defaultLocalizationBundle] = bundle
         return bundle
     }
+
 
     public var localized: String {
         self.localized(for: Self.defaultLocalizationLanguage)

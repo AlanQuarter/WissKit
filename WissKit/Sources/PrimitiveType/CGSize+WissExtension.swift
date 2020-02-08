@@ -10,6 +10,15 @@ import UIKit
 
 extension CGSize {
 
+    init(sideLengthOfSquare length: CGFloat) {
+        self.init(width: length, height: length)
+    }
+
+}
+
+
+extension CGSize {
+
     public static func * (scalar: CGFloat, size: CGSize) -> CGSize {
         CGSize(width: scalar * size.width, height: scalar * size.height)
     }
