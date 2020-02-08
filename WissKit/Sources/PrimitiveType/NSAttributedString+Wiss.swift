@@ -13,7 +13,7 @@ extension NSAttributedString: WissCompatible {}
 
 extension Wiss where WissBase: NSAttributedString {
 
-    func boundingRect(maxWidth: CGFloat = .greatestFiniteMagnitude, maxHeight: CGFloat = .greatestFiniteMagnitude) -> CGRect {
+    public func boundingRect(maxWidth: CGFloat = .greatestFiniteMagnitude, maxHeight: CGFloat = .greatestFiniteMagnitude) -> CGRect {
         self.base.boundingRect(
                 with: CGSize(width: maxWidth, height: maxHeight),
                 options: [.usesLineFragmentOrigin, .usesFontLeading],
