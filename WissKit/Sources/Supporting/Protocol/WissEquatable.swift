@@ -7,7 +7,7 @@
 import Foundation
 
 
-public protocol WissEquatable {
+protocol WissEquatable {
 
     func wiss_isEqual<T>(to other: T) -> Bool
 

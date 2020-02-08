@@ -16,7 +16,7 @@ public struct Wiss<WissBase> {
     public init(_ base: WissBase) {
         self.base = base
         self.deinitHandler = WissDeinitHandler {
-            WissStore.shared.flush(for: base)
+            WissStore.shared.flushIfNeeded(for: base)
         }
     }
 
@@ -38,59 +38,37 @@ extension Wiss {
 
     public static subscript<E: RawRepresentable, T>(storeType: WissStoreType, keyDescription: E) -> T? where E.RawValue == String {
         get {
-            WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyDescription.rawValue)]
+            Self[storeType, keyDescription.rawValue]
         }
 
         set {
-            WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyDescription.rawValue)] = newValue
-        }
-    }
-
-
-    public static subscript<K: WissStoreKeyExpression, T>(keyExpression: K) -> T? {
-        get {
-            WissStore.shared[keyExpression.key(for: WissBase.self)]
-        }
-
-        set {
-            WissStore.shared[keyExpression.key(for: WissBase.self)] = newValue
+            Self[storeType, keyDescription.rawValue] = newValue
         }
     }
 
 }
 
 
-extension Wiss where WissBase: WissInstanceIdentifiable {
+extension Wiss where WissBase: InstanceIdentifiable {
 
-    public subscript<T>(storeType: WissStoreType, keyName: String) -> T? {
+    public subscript<T>(keyName: String) -> T? {
         get {
-            WissStore.shared[WissStoreKey(storeType: storeType, instance: self.base, keyName: keyName)]
+            WissStore.shared[WissStoreKey(instance: self.base, keyName: keyName)]
         }
 
         set {
-            WissStore.shared[WissStoreKey(storeType: storeType, instance: self.base, keyName: keyName)] = newValue
+            WissStore.shared[WissStoreKey(instance: self.base, keyName: keyName)] = newValue
         }
     }
 
 
-    public subscript<E: RawRepresentable, T>(storeType: WissStoreType, keyDescription: E) -> T? where E.RawValue == String {
+    public subscript<E: RawRepresentable, T>(keyDescription: E) -> T? where E.RawValue == String {
         get {
-            WissStore.shared[WissStoreKey(storeType: storeType, instance: self.base, keyName: keyDescription.rawValue)]
+            self[keyDescription.rawValue]
         }
 
         set {
-            WissStore.shared[WissStoreKey(storeType: storeType, instance: self.base, keyName: keyDescription.rawValue)] = newValue
-        }
-    }
-
-
-    public subscript<K: WissStoreKeyExpression, T>(keyExpression: K) -> T? {
-        get {
-            WissStore.shared[keyExpression.key(for: self.base)]
-        }
-
-        set {
-            WissStore.shared[keyExpression.key(for: self.base)] = newValue
+            self[keyDescription.rawValue] = newValue
         }
     }
 
