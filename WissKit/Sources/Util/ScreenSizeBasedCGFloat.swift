@@ -124,11 +124,21 @@ public struct ScreenSizeWidthConstraint {
 
     let check: (CGFloat) -> Bool
 
+
+    public init(checker: @escaping (CGFloat) -> Bool) {
+        self.check = checker
+    }
+
 }
 
 
 public struct ScreenSizeHeightConstraint {
 
     let check: (CGFloat) -> Bool
+
+
+    public init(checker: @escaping (CGFloat) -> Bool) {
+        self.check = checker
+    }
 
 }
