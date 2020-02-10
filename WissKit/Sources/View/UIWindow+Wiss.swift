@@ -10,7 +10,7 @@ import UIKit
 
 extension Wiss where WissBase: UIWindow {
 
-    static var safeAreaInsets: UIEdgeInsets {
+    public static var safeAreaInsets: UIEdgeInsets {
         guard #available(iOS 11.0, *) else {
             return .zero
         }
