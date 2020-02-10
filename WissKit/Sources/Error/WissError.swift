@@ -7,7 +7,7 @@
 import Foundation
 
 
-public protocol WissError: LocalizedError, CustomStringConvertible {
+public protocol WissError: LocalizedError, Equatable {
 
     var code: Int { get }
     var message: String? { get }
@@ -17,7 +17,7 @@ public protocol WissError: LocalizedError, CustomStringConvertible {
 
 extension WissError {
 
-    public init?(_ error: Error) {
+    public init?(_ error: Error?) {
         guard let wissError = error as? Self else {
             return nil
         }
@@ -26,17 +26,18 @@ extension WissError {
     }
 
 
-    public var errorDescription: String? {
+    var errorDescription: String? {
         self.message?.wiss.localized
     }
 
-    public var description: String {
-        self.errorDescription ?? ""
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.code == rhs.code
     }
 
 
-    public static func ~= (match: Self, error: Error) -> Bool {
-        error is Self && match.code == Self(error)?.code
+    public static func ~= (pattern: Self, value: Error?) -> Bool {
+        pattern == Self(value)
     }
 
 }
