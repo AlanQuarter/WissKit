@@ -14,6 +14,7 @@
 		2DB993412A2A26C8F97225E6 /* InstanceIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB994121D040829B03C1A67 /* InstanceIdentifiable.swift */; };
 		2DB993A78254022F684686EA /* WissKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2DB99591647EB850C8ED5836 /* WissKit.podspec */; };
 		2DB99425CB35786A3FB43C9B /* UIColor+WissExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB9907227780A376EBF3DEF /* UIColor+WissExtension.swift */; };
+		2DB99466B55C087DBB7DA76B /* UIWindow+Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99660D85612CA03B56932 /* UIWindow+Wiss.swift */; };
 		2DB994D3E8201672362CEFBF /* Int+Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99A163EF086D3061C8DAE /* Int+Wiss.swift */; };
 		2DB9951E5CACC70F8A61D2F0 /* String+Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB993883AC8BAEEC2575258 /* String+Wiss.swift */; };
 		2DB99523A0AAEB0F6FE9C31E /* Int+WissExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99FD272EA7AC270C114BA /* Int+WissExtension.swift */; };
@@ -49,6 +50,7 @@
 		2DB995C8662675C85899C20F /* WissEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissEquatable.swift; sourceTree = "<group>"; };
 		2DB99622F2D0C570D8D3C65D /* WSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSError.swift; sourceTree = "<group>"; };
 		2DB9962B82228C35881B55AB /* UIView+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Wiss.swift"; sourceTree = "<group>"; };
+		2DB99660D85612CA03B56932 /* UIWindow+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Wiss.swift"; sourceTree = "<group>"; };
 		2DB998C5FCF60B899503706F /* WSHttpError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSHttpError.swift; sourceTree = "<group>"; };
 		2DB998DFC29FC7E1BF78A02C /* WissError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissError.swift; sourceTree = "<group>"; };
 		2DB999615B2E281C68811EAB /* UIFont+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Wiss.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				2DB994C4FCCA6307BA1DB175 /* UIScreen+Wiss.swift */,
 				2DB99D296F6751AB6943901F /* UILabel+Wiss.swift */,
 				2DB9962B82228C35881B55AB /* UIView+Wiss.swift */,
+				2DB99660D85612CA03B56932 /* UIWindow+Wiss.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				2DB996322C97FBEBDCE1EF23 /* UIScreen+Wiss.swift in Sources */,
 				2DB99201AECC067BD1A83B66 /* UILabel+Wiss.swift in Sources */,
 				2DB99E81EEFBA6B0206A0D81 /* UIView+Wiss.swift in Sources */,
+				2DB99466B55C087DBB7DA76B /* UIWindow+Wiss.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
