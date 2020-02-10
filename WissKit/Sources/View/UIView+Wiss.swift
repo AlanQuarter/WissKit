@@ -13,39 +13,15 @@ extension UIView: WissCompatible {}
 
 extension Wiss where WissBase: UIView {
 
-    public var cornerRadius: CGFloat {
-        get {
-            self.base.layer.cornerRadius
-        }
-
-        set {
-            self.base.layer.cornerRadius = newValue
-            self.base.layer.masksToBounds = newValue > 0
-        }
+    public func roundCorner(radius: CGFloat) {
+        self.base.layer.cornerRadius = radius
+        self.base.layer.masksToBounds = radius > 0
     }
 
-    public var borderWidth: CGFloat {
-        get {
-            self.base.layer.borderWidth
-        }
 
-        set {
-            self.base.layer.borderWidth = newValue
-        }
-    }
-
-    public var borderColor: UIColor? {
-        get {
-            guard let cgColor = self.base.layer.borderColor else {
-                return nil
-            }
-
-            return UIColor(cgColor: cgColor)
-        }
-
-        set {
-            self.base.layer.borderColor = newValue?.cgColor
-        }
+    public func drawBorder(width: CGFloat, color: UIColor?) {
+        self.base.layer.borderWidth = width
+        self.base.layer.borderColor = color?.cgColor
     }
 
 }
