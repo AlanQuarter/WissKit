@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target  = '9.0'
 #   spec.osx.deployment_target  = '10.10'
 
-  spec.source_files       = 'WissKit/Source/**/*.swift'
+  spec.source_files       = 'WissKit/**/*.swift'
 #   spec.ios.source_files   = 'Reachability/ios/*.swift', 'Reachability/extensions/*.swift'
 #   spec.osx.source_files   = 'Reachability/osx/*.swift'
 
