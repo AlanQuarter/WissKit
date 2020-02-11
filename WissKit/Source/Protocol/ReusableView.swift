@@ -23,5 +23,4 @@ extension Wiss where WissBase: ReusableView {
 extension UITableViewCell: ReusableView {}
 extension UITableViewHeaderFooterView: ReusableView {}
 
-extension UICollectionViewCell: ReusableView {}
 extension UICollectionReusableView: ReusableView {}
