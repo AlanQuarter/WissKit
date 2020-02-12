@@ -19,6 +19,6 @@ extension WissKitError {
 struct WissKitError: WissError {
 
     var code: Int
-    var message: String?
+    var message: String
 
 }
