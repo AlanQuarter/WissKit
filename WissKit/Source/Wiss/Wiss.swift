@@ -10,14 +10,10 @@ import Foundation
 public struct Wiss<WissBase> {
 
     public let base: WissBase
-    private let deinitHandler: WissDeinitHandler
 
 
     public init(_ base: WissBase) {
         self.base = base
-        self.deinitHandler = WissDeinitHandler {
-            WissStore.shared.flushIfNeeded(for: base)
-        }
     }
 
 }
@@ -70,6 +66,11 @@ extension Wiss where WissBase: InstanceIdentifiable {
         set {
             self[keyDescription.rawValue] = newValue
         }
+    }
+
+
+    public func flushStoredValues() {
+        WissStore.shared.flushIfNeeded(for: self.base)
     }
 
 }
