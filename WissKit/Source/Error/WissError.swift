@@ -22,8 +22,6 @@ extension WissError {
             return nil
         }
 
-        error?.localizedDescription
-
         self = wissError
     }
 
