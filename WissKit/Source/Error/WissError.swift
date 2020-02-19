@@ -7,7 +7,7 @@
 import Foundation
 
 
-public protocol WissError: LocalizedError, Equatable {
+public protocol WissError: LocalizedError, CustomStringConvertible, Equatable {
 
     var code: Int { get }
     var message: String? { get }
@@ -28,6 +28,10 @@ extension WissError {
 
     public var errorDescription: String? {
         self.message?.wiss.localized
+    }
+
+    public var description: String {
+        "[\(Self.self)(\(self.code))] \(self.localizedDescription)"
     }
 
 

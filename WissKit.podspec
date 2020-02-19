@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name          = 'WissKit'
-  spec.version       = '0.4.4'
+  spec.version       = '0.4.5'
   spec.license       = { :type => "MIT", :file => "LICENSE" }
   spec.homepage      = 'https://github.com/AlanQuarter/WissKit'
   spec.authors       = { 'AlanQuarter' => 'the9thstar@naver.com' }
