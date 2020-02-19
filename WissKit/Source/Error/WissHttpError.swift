@@ -16,6 +16,11 @@ public protocol WissHttpError: WissError {
 
 extension WissHttpError {
 
+    public var description: String {
+        "[\(Self.self)(\(self.httpStatusCode), \(self.code))] \(self.localizedDescription)"
+    }
+
+
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.httpStatusCode == rhs.httpStatusCode && lhs.code == rhs.code
     }
