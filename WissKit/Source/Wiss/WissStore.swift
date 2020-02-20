@@ -23,8 +23,6 @@ final class WissStore {
 
 
     func value<WissBase, T>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T {
-        print("[WK/WissStore] get Value 1, keyString = \(key.keyString(for: type))")
-
         switch key.storeType {
         case .memory:
             return self.valueFromMemory(forKeyString: key.keyString(for: type), defaultValue: key.defaultValue)
@@ -36,20 +34,25 @@ final class WissStore {
 
 
     func value<WissBase, T: Codable>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T {
-        print("[WK/WissStore] get Value 2, keyString = \(key.keyString(for: type))")
-
         switch key.storeType {
         case .memory:
+            print("[WK/WissStore] (0), keyString = \(key.keyString(for: type))")
             return self.valueFromMemory(forKeyString: key.keyString(for: type), defaultValue: key.defaultValue)
 
         case .memoryAndUserDefaults:
+            print("[WK/WissStore] (1), keyString = \(key.keyString(for: type))")
+            
             if let value = try self.valueFromUserDefaults(forType: type, key: key) {
                 return value
             }
+
+            print("[WK/WissStore] (2), keyString = \(key.keyString(for: type))")
             
             guard let userDefaults = self.userDefaults else {
                 throw WissKitError.userDefaultsNotFound
             }
+
+            print("[WK/WissStore] (3), keyString = \(key.keyString(for: type))")
 
             self.memoryData[key.keyString(for: type)] = key.defaultValue
             userDefaults.setValue(try key.defaultValue.wiss_jsonString(), forKey: key.keyString(for: type))
