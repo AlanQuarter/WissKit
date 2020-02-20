@@ -119,7 +119,8 @@ final class WissStore {
 
 
     private func valueFromMemory<T>(forKeyString keyString: String, defaultValue: T) -> T {
-        if let value = self.memoryData[keyString] as? T {
+        if let value = self.memoryData[keyString] as? T,
+           value != nil {
             return value
         }
 
@@ -137,7 +138,8 @@ final class WissStore {
 
         print("[WK/WissStore] (1), keyString = \(key.keyString(for: type))")
         
-        if let value = self.memoryData[key.keyString(for: type)] as? T {
+        if let value = self.memoryData[key.keyString(for: type)] as? T,
+           value != nil {
             print("[WK/WissStore] keyString = \(key.keyString(for: type)) value = \(value)")
             return value
         }
