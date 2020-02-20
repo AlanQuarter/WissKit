@@ -142,8 +142,7 @@ final class WissStore {
 
         print("[WK/WissStore] (1), keyString = \(key.keyString(for: type))")
         
-        if let value = self.memoryData[key.keyString(for: type)] as? T,
-           value != nil {
+        if let value = self.memoryData[key.keyString(for: type)] as? T {
             print("[WK/WissStore] keyString = \(key.keyString(for: type)) value = \(value)")
             return value
         }
@@ -163,6 +162,41 @@ final class WissStore {
         }
 
         print("[WK/WissStore] (3), keyString = \(key.keyString(for: type))")
+
+        return nil
+    }
+
+
+    private func valueFromUserDefaults<WissBase, T: Codable>(forType type: WissBase.Type, key: WissStoreKey<T?>) throws -> T? {
+        print("[WK/WissStore] *(0), keyString = \(key.keyString(for: type))")
+
+        guard let userDefaults = self.userDefaults else {
+            throw WissKitError.userDefaultsNotFound
+        }
+
+        print("[WK/WissStore] *(1), keyString = \(key.keyString(for: type))")
+
+        if let value = self.memoryData[key.keyString(for: type)] as? T,
+           value != nil {
+            print("[WK/WissStore] *keyString = \(key.keyString(for: type)) value = \(value)")
+            return value
+        }
+
+        print("[WK/WissStore] *(2), keyString = \(key.keyString(for: type))")
+
+        if let json = userDefaults.value(forKey: key.keyString(for: type)) as? String {
+            print("[WK/WissStore] *userDefaults = \(userDefaults)")
+            print("[WK/WissStore] *keyString = \(key.keyString(for: type))")
+            print("[WK/WissStore] *json = \(json)")
+
+            let value: T = try json.wiss.decodedValue()
+            print("[WK/WissStore] *value = \(value)")
+
+            self.memoryData[key.keyString(for: type)] = value
+            return value
+        }
+
+        print("[WK/WissStore] *(3), keyString = \(key.keyString(for: type))")
 
         return nil
     }
