@@ -23,6 +23,8 @@ final class WissStore {
 
 
     func value<WissBase, T>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T {
+        print("[WK/WissStore] get Value 1")
+
         switch key.storeType {
         case .memory:
             return self.valueFromMemory(forKeyString: key.keyString(for: type), defaultValue: key.defaultValue)
@@ -34,6 +36,8 @@ final class WissStore {
 
 
     func value<WissBase, T: Codable>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T {
+        print("[WK/WissStore] get Value 2")
+
         switch key.storeType {
         case .memory:
             return self.valueFromMemory(forKeyString: key.keyString(for: type), defaultValue: key.defaultValue)
@@ -55,6 +59,8 @@ final class WissStore {
 
 
     func value<WissBase: Hashable, T>(forInstance instance: WissBase, key: WissStoreKey<T>) throws -> T {
+        print("[WK/WissStore] get Value 3")
+
         switch key.storeType {
         case .memory:
             return self.valueFromMemory(forKeyString: key.keyString(for: instance), defaultValue: key.defaultValue)
