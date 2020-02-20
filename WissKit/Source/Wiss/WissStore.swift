@@ -138,6 +138,7 @@ final class WissStore {
         print("[WK/WissStore] (1), keyString = \(key.keyString(for: type))")
         
         if let value = self.memoryData[key.keyString(for: type)] as? T {
+            print("[WK/WissStore] keyString = \(key.keyString(for: type)) value = \(value)")
             return value
         }
 
