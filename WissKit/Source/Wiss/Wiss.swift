@@ -21,22 +21,37 @@ public struct Wiss<WissBase> {
 
 extension Wiss {
 
-    public static func value<T>(forKey key: WissStoreKey<T>) throws -> T {
+    public static func value<ValueType>(forKey key: WissStoreKey<ValueType>) throws -> ValueType {
         try WissStore.shared.value(forType: WissBase.self, key: key)
     }
 
 
-    public static func value<T: Codable>(forKey key: WissStoreKey<T>) throws -> T {
+    public static func value<ValueType>(forKey key: WissStoreKey<ValueType?>) throws -> ValueType? {
         try WissStore.shared.value(forType: WissBase.self, key: key)
     }
 
 
-    public static func set<T>(_ value: T, forKey key: WissStoreKey<T>) throws {
+    public static func value<ValueType: Codable>(forKey key: WissStoreKey<ValueType>) throws -> ValueType {
+        try WissStore.shared.value(forType: WissBase.self, key: key)
+    }
+
+
+    public static func value<ValueType: Codable>(forKey key: WissStoreKey<ValueType?>) throws -> ValueType? {
+        try WissStore.shared.value(forType: WissBase.self, key: key)
+    }
+
+
+    public static func set<ValueType>(_ value: ValueType, forKey key: WissStoreKey<ValueType>) throws {
         try WissStore.shared.set(value, forType: WissBase.self, key: key)
     }
 
 
-    public static func set<T: Codable>(_ value: T, forKey key: WissStoreKey<T>) throws {
+    public static func set<ValueType: Codable>(_ value: ValueType, forKey key: WissStoreKey<ValueType>) throws {
+        try WissStore.shared.set(value, forType: WissBase.self, key: key)
+    }
+
+
+    public static func set<ValueType: Codable>(_ value: ValueType?, forKey key: WissStoreKey<ValueType?>) throws {
         try WissStore.shared.set(value, forType: WissBase.self, key: key)
     }
 
@@ -45,7 +60,12 @@ extension Wiss {
 
 extension Wiss where WissBase: Hashable {
 
-    public func value<T>(forKey key: WissStoreKey<T>) throws -> T {
+    public func value<ValueType>(forKey key: WissStoreKey<ValueType>) throws -> ValueType {
+        try WissStore.shared.value(forInstance: self.base, key: key)
+    }
+
+
+    public func value<ValueType>(forKey key: WissStoreKey<ValueType?>) throws -> ValueType? {
         try WissStore.shared.value(forInstance: self.base, key: key)
     }
     
