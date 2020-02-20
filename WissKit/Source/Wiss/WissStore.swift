@@ -138,7 +138,13 @@ final class WissStore {
         }
 
         if let json = userDefaults.value(forKey: key.keyString(for: type)) as? String {
+            print("[WK/WissStore] userDefaults = \(userDefaults)")
+            print("[WK/WissStore] keyString = \(key.keyString(for: type))")
+            print("[WK/WissStore] json = \(json)")
+
             let value: T = try json.wiss.decodedValue()
+            print("[WK/WissStore] value = \(value)")
+
             self.memoryData[key.keyString(for: type)] = value
             return value
         }
