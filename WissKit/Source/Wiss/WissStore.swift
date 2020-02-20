@@ -227,13 +227,13 @@ final class WissStore {
             throw WissKitError.userDefaultsNotFound
         }
 
-        if let value = self.memoryData[key.keyString(for: type)] as? ValueType,
+        if let value = self.memoryData[key.keyString(for: type)] as? ValueType?,
            value != nil {
             return value
         }
 
         if let json = userDefaults.value(forKey: key.keyString(for: type)) as? String {
-            let value: ValueType = try json.wiss.decodedValue()
+            let value: ValueType? = try json.wiss.decodedValue()
             self.memoryData[key.keyString(for: type)] = value
             return value
         }
