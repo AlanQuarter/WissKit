@@ -21,56 +21,42 @@ public struct Wiss<WissBase> {
 
 extension Wiss {
 
-    public static subscript<T>(storeType: WissStoreType, keyName: String) -> T? {
-        get {
-            WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyName)]
-        }
-
-        set {
-            WissStore.shared[WissStoreKey(storeType: storeType, type: WissBase.self, keyName: keyName)] = newValue
-        }
+    public static func value<T>(forKey key: WissStoreKey<T>) throws -> T {
+        try WissStore.shared.value(forType: WissBase.self, key: key)
     }
 
 
-    public static subscript<E: RawRepresentable, T>(storeType: WissStoreType, keyDescription: E) -> T? where E.RawValue == String {
-        get {
-            Self[storeType, keyDescription.rawValue]
-        }
+    public static func value<T: Codable>(forKey key: WissStoreKey<T>) throws -> T {
+        try WissStore.shared.value(forType: WissBase.self, key: key)
+    }
 
-        set {
-            Self[storeType, keyDescription.rawValue] = newValue
-        }
+
+    public static func set<T>(_ value: T, forKey key: WissStoreKey<T>) throws {
+        try WissStore.shared.set(value, forType: WissBase.self, key: key)
+    }
+
+
+    public static func set<T: Codable>(_ value: T, forKey key: WissStoreKey<T>) throws {
+        try WissStore.shared.set(value, forType: WissBase.self, key: key)
     }
 
 }
 
 
-extension Wiss where WissBase: InstanceIdentifiable {
+extension Wiss where WissBase: Hashable {
 
-    public subscript<T>(keyName: String) -> T? {
-        get {
-            WissStore.shared[WissStoreKey(instance: self.base, keyName: keyName)]
-        }
-
-        set {
-            WissStore.shared[WissStoreKey(instance: self.base, keyName: keyName)] = newValue
-        }
+    public func value<T>(forKey key: WissStoreKey<T>) throws -> T {
+        try WissStore.shared.value(forInstance: self.base, key: key)
     }
-
-
-    public subscript<E: RawRepresentable, T>(keyDescription: E) -> T? where E.RawValue == String {
-        get {
-            self[keyDescription.rawValue]
-        }
-
-        set {
-            self[keyDescription.rawValue] = newValue
-        }
+    
+    
+    public func set<T>(_ value: T, forKey key: WissStoreKey<T>) throws {
+        try WissStore.shared.set(value, forInstance: self.base, key: key)
     }
 
 
     public func flushStoredValues() {
-        WissStore.shared.flushIfNeeded(for: self.base)
+        WissStore.shared.flush(for: self.base)
     }
 
 }

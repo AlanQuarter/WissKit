@@ -22,50 +22,94 @@ final class WissStore {
     }
 
 
-    subscript<T>(key: WissStoreKey) -> T? {
-        get {
-            switch key.storeType {
-            case .memory:
-                return self.memoryData[key.keyString] as? T
-
-            case .memoryAndUserDefaults:
-                if let value = self.memoryData[key.keyString] {
-                    return value as? T
-                }
-
-                if let value = self.userDefaults?.value(forKey: key.keyString) {
-                    self.memoryData[key.keyString] = value
-                    return value as? T
-                }
-
-                return nil
-            }
-        }
-
-        set {
-            switch key.storeType {
-            case .memory:
-                self.memoryData[key.keyString] = newValue
-
-            case .memoryAndUserDefaults:
-                if let oldValue = self[key] as WissEquatable? {
-                    guard oldValue.wiss_isEqual(to: newValue) == false else {
-                        return
-                    }
-                }
-
-                self.memoryData[key.keyString] = newValue
-                self.userDefaults?.setValue(newValue, forKey: key.keyString)
-            }
+    func value<WissBase, T>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T {
+        switch key.storeType {
+        case .memory:
+            return self.valueFromMemory(forKeyString: key.keyString(for: type), defaultValue: key.defaultValue)
+            
+        case .memoryAndUserDefaults:
+            throw WissKitError.valueNotCodable
         }
     }
 
 
-    func flushIfNeeded<WissBase>(for instance: WissBase) {
-        guard let prefix = try? WissStoreKey.prefix(for: instance) else {
-            return
-        }
+    func value<WissBase, T: Codable>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T {
+        switch key.storeType {
+        case .memory:
+            return self.valueFromMemory(forKeyString: key.keyString(for: type), defaultValue: key.defaultValue)
 
+        case .memoryAndUserDefaults:
+            if let value = try self.valueFromUserDefaults(forType: type, key: key) {
+                return value
+            }
+            
+            guard let userDefaults = self.userDefaults else {
+                throw WissKitError.userDefaultsNotFound
+            }
+
+            self.memoryData[key.keyString(for: type)] = key.defaultValue
+            userDefaults.setValue(try key.defaultValue.wiss_jsonString(), forKey: key.keyString(for: type))
+            return key.defaultValue
+        }
+    }
+
+
+    func value<WissBase: Hashable, T>(forInstance instance: WissBase, key: WissStoreKey<T>) throws -> T {
+        switch key.storeType {
+        case .memory:
+            return self.valueFromMemory(forKeyString: key.keyString(for: instance), defaultValue: key.defaultValue)
+            
+        case .memoryAndUserDefaults:
+            throw WissKitError.userDefaultsNotAvailable
+        }
+    }
+
+
+    func set<WissBase, T>(_ value: T, forType type: WissBase.Type, key: WissStoreKey<T>) throws {
+        switch key.storeType {
+        case .memory:
+            self.memoryData[key.keyString(for: type)] = value
+
+        case .memoryAndUserDefaults:
+            throw WissKitError.valueNotCodable
+        }
+    }
+
+
+    func set<WissBase, T: Codable>(_ value: T, forType type: WissBase.Type, key: WissStoreKey<T>) throws {
+        switch key.storeType {
+        case .memory:
+            self.memoryData[key.keyString(for: type)] = value
+
+        case .memoryAndUserDefaults:
+            if let oldValue = try? self.valueFromUserDefaults(forType: type, key: key) as? WissEquatable,
+               oldValue.wiss_isEqual(to: value) {
+                return
+            }
+            
+            guard let userDefaults = self.userDefaults else {
+                throw WissKitError.userDefaultsNotFound
+            }
+
+            self.memoryData[key.keyString(for: type)] = value
+            userDefaults.setValue(try value.wiss_jsonString(), forKey: key.keyString(for: type))
+        }
+    }
+
+
+    func set<WissBase: Hashable, T>(_ value: T, forInstance instance: WissBase, key: WissStoreKey<T>) throws {
+        switch key.storeType {
+        case .memory:
+            self.memoryData[key.keyString(for: instance)] = value
+            
+        case .memoryAndUserDefaults:
+            throw WissKitError.userDefaultsNotAvailable
+        }
+    }
+
+
+    func flush<WissBase: Hashable>(for instance: WissBase) {
+        let prefix = instance.wiss_instanceId
         let keyList = self.memoryData.keys.filter { $0.hasPrefix(prefix) }
 
         for key in keyList {
@@ -73,6 +117,72 @@ final class WissStore {
         }
     }
 
+
+    private func valueFromMemory<T>(forKeyString keyString: String, defaultValue: T) -> T {
+        if let value = self.memoryData[keyString] as? T {
+            return value
+        }
+
+        self.memoryData[keyString] = defaultValue
+        return defaultValue
+    }
+
+
+    private func valueFromUserDefaults<WissBase, T: Codable>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T? {
+        guard let userDefaults = self.userDefaults else {
+            throw WissKitError.userDefaultsNotFound
+        }
+        
+        if let value = self.memoryData[key.keyString(for: type)] as? T {
+            return value
+        }
+
+        if let json = userDefaults.value(forKey: key.keyString(for: type)) as? String {
+            let value: T = try json.wiss.decodedValue()
+            self.memoryData[key.keyString(for: type)] = value
+            return value
+        }
+
+        return nil
+    }
+
+}
+
+
+public struct WissStoreKey<ValueType> {
+
+    public let storeType: WissStoreType
+    public let keyName: String
+    public let defaultValue: ValueType
+    
+    
+    public init(storeType: WissStoreType = .memory, keyName: String, defaultValue: ValueType) {
+        self.storeType = storeType
+        self.keyName = keyName
+        self.defaultValue = defaultValue
+    }
+
+
+    fileprivate func keyString<WissBase>(for type: WissBase.Type) -> String {
+        "\(type).\(self.keyName)"
+    }
+
+
+    fileprivate func keyString<WissBase: Hashable>(for instance: WissBase) -> String {
+        "\(instance.wiss_instanceId).\(self.keyName)"
+    }
+
+}
+
+
+extension WissStoreKey where ValueType: ExpressibleByNilLiteral {
+
+    public init(storeType: WissStoreType = .memory, keyName: String) {
+        self.storeType = storeType
+        self.keyName = keyName
+        self.defaultValue = nil
+    }
+    
 }
 
 
@@ -80,38 +190,5 @@ public enum WissStoreType {
 
     case memory
     case memoryAndUserDefaults
-
-}
-
-
-struct WissStoreKey {
-
-    let storeType: WissStoreType
-    let keyString: String
-
-
-    init<WissBase>(storeType: WissStoreType, type: WissBase.Type, keyName: String) {
-        self.storeType = storeType
-        self.keyString = "\(type).\(keyName)"
-    }
-
-
-    init<WissBase: InstanceIdentifiable>(instance: WissBase, keyName: String) {
-        do {
-            self.storeType = .memory
-            self.keyString = "\(try Self.prefix(for: instance)).\(keyName)"
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-
-
-    fileprivate static func prefix<WissBase>(for instance: WissBase) throws -> String {
-        guard let instanceIdentifiable = instance as? InstanceIdentifiable else {
-            throw WissKitError.notInstanceIdentifiable
-        }
-
-        return "\(type(of: instance)).\(instanceIdentifiable.wiss_instanceId)"
-    }
 
 }
