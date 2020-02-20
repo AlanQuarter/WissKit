@@ -12,30 +12,57 @@ extension String: WissCompatible {}
 
 extension Wiss where WissBase == String {
 
+    public func decodedValue<T: Decodable>() throws -> T {
+        guard let data = self.base.data(using: .utf8) else {
+            throw WissKitError.decodingFailed
+        }
+
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+
+}
+
+
+extension Wiss where WissBase == String {
+
     public static var defaultLocalizationLanguage: String? {
         get {
-            Self[.memoryAndUserDefaults, Key.defaultLocalizationLanguage] as String?
+            do {
+                return try Self.value(forKey: .wiss_defaultLocalizationLanguage)
+            } catch {
+                print(error)
+                return nil
+            }
         }
 
         set {
-            Self[.memoryAndUserDefaults, Key.defaultLocalizationLanguage] = newValue
+            do {
+                try Self.set(newValue, forKey: .wiss_defaultLocalizationLanguage)
+            } catch {
+                print(error)
+            }
         }
     }
 
 
     private static var defaultLocalizationBundle: Bundle? {
-        if let bundle = Self[.memory, Key.defaultLocalizationBundle] as Bundle? {
-            return bundle
-        }
+        do {
+            if let bundle = try Self.value(forKey: .wiss_defaultLocalizationBundle) {
+                return bundle
+            }
 
-        guard let defaultLanguage = Self.defaultLocalizationLanguage,
-              let bundlePath = Bundle.main.path(forResource: defaultLanguage, ofType: "lproj"),
-              let bundle = Bundle(path: bundlePath) else {
+            guard let defaultLanguage = Self.defaultLocalizationLanguage,
+                  let bundlePath = Bundle.main.path(forResource: defaultLanguage, ofType: "lproj"),
+                  let bundle = Bundle(path: bundlePath) else {
+                return nil
+            }
+
+            try Self.set(bundle, forKey: .wiss_defaultLocalizationBundle)
+            return bundle
+        } catch {
+            print(error)
             return nil
         }
-
-        Self[.memory, Key.defaultLocalizationBundle] = bundle
-        return bundle
     }
 
 
@@ -66,13 +93,14 @@ extension Wiss where WissBase == String {
 }
 
 
-extension Wiss where WissBase == String {
+extension WissStoreKey {
 
-    enum Key: String {
-
-        case defaultLocalizationBundle
-        case defaultLocalizationLanguage
-
+    fileprivate static var wiss_defaultLocalizationLanguage: WissStoreKey<String?> {
+        WissStoreKey<String?>(storeType: .memoryAndUserDefaults, keyName: "defaultLocalizationLanguage")
     }
 
+    fileprivate static var wiss_defaultLocalizationBundle: WissStoreKey<Bundle?> {
+        WissStoreKey<Bundle?>(keyName: "defaultLocalizationBundle")
+    }
+    
 }
