@@ -36,23 +36,16 @@ final class WissStore {
     func value<WissBase, T: Codable>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T {
         switch key.storeType {
         case .memory:
-            print("[WK/WissStore] (0), keyString = \(key.keyString(for: type))")
             return self.valueFromMemory(forKeyString: key.keyString(for: type), defaultValue: key.defaultValue)
 
         case .memoryAndUserDefaults:
-            print("[WK/WissStore] (1), keyString = \(key.keyString(for: type))")
-            
             if let value = try self.valueFromUserDefaults(forType: type, key: key) {
                 return value
             }
-
-            print("[WK/WissStore] (2), keyString = \(key.keyString(for: type))")
             
             guard let userDefaults = self.userDefaults else {
                 throw WissKitError.userDefaultsNotFound
             }
-
-            print("[WK/WissStore] (3), keyString = \(key.keyString(for: type))")
 
             self.memoryData[key.keyString(for: type)] = key.defaultValue
             userDefaults.setValue(try key.defaultValue.wiss_jsonString(), forKey: key.keyString(for: type))
@@ -136,13 +129,19 @@ final class WissStore {
 
 
     private func valueFromUserDefaults<WissBase, T: Codable>(forType type: WissBase.Type, key: WissStoreKey<T>) throws -> T? {
+        print("[WK/WissStore] (0), keyString = \(key.keyString(for: type))")
+
         guard let userDefaults = self.userDefaults else {
             throw WissKitError.userDefaultsNotFound
         }
+
+        print("[WK/WissStore] (1), keyString = \(key.keyString(for: type))")
         
         if let value = self.memoryData[key.keyString(for: type)] as? T {
             return value
         }
+
+        print("[WK/WissStore] (2), keyString = \(key.keyString(for: type))")
 
         if let json = userDefaults.value(forKey: key.keyString(for: type)) as? String {
             print("[WK/WissStore] userDefaults = \(userDefaults)")
@@ -155,6 +154,8 @@ final class WissStore {
             self.memoryData[key.keyString(for: type)] = value
             return value
         }
+
+        print("[WK/WissStore] (3), keyString = \(key.keyString(for: type))")
 
         return nil
     }
