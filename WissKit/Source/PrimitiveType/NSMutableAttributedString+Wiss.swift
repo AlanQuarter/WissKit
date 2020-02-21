@@ -12,18 +12,33 @@ extension Wiss where WissBase: NSMutableAttributedString {
 
     public func add(font: UIFont, range: NSRange? = nil) {
         let actualRange = range ?? self.base.string.wiss.wholeNsRange
+
+        guard actualRange.length > 0 else {
+            return
+        }
+
         self.base.addAttribute(.font, value: font, range: actualRange)
     }
 
 
     public func add(textColor: UIColor, range: NSRange? = nil) {
         let actualRange = range ?? self.base.string.wiss.wholeNsRange
+
+        guard actualRange.length > 0 else {
+            return
+        }
+
         self.base.addAttribute(.foregroundColor, value: textColor, range: actualRange)
     }
 
 
     public func add(alignment: NSTextAlignment, range: NSRange? = nil) {
         var actualRange = range ?? self.base.string.wiss.wholeNsRange
+
+        guard actualRange.length > 0 else {
+            return
+        }
+
         let paragraphStyle: NSMutableParagraphStyle
 
         if let style = self.base.attribute(.paragraphStyle, at: actualRange.location, effectiveRange: &actualRange) as? NSParagraphStyle,
@@ -40,6 +55,11 @@ extension Wiss where WissBase: NSMutableAttributedString {
 
     public func add(lineBreakMode: NSLineBreakMode, range: NSRange? = nil) {
         var actualRange = range ?? self.base.string.wiss.wholeNsRange
+
+        guard actualRange.length > 0 else {
+            return
+        }
+
         let paragraphStyle: NSMutableParagraphStyle
 
         if let style = self.base.attribute(.paragraphStyle, at: actualRange.location, effectiveRange: &actualRange) as? NSParagraphStyle,
@@ -56,6 +76,11 @@ extension Wiss where WissBase: NSMutableAttributedString {
 
     public func add(lineHeight: CGFloat, range: NSRange? = nil) {
         var actualRange = range ?? self.base.string.wiss.wholeNsRange
+
+        guard actualRange.length > 0 else {
+            return
+        }
+
         let paragraphStyle: NSMutableParagraphStyle
 
         if let style = self.base.attribute(.paragraphStyle, at: actualRange.location, effectiveRange: &actualRange) as? NSParagraphStyle,
