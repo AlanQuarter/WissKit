@@ -28,6 +28,7 @@
 		2DB99D74EB50CAC27F64A9D5 /* WissStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB9947B0520CE65474F627B /* WissStore.swift */; };
 		2DB99DDFAA01E0D9BA668D3A /* WissDeinitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99EF77F3A585241AEEFB2 /* WissDeinitHandler.swift */; };
 		2DB99E00A3A5B05B52F3582D /* NSAttributedString+Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99BFA7ABE7DC2E3778B61 /* NSAttributedString+Wiss.swift */; };
+		2DB99E06B3E58F2F3033C5F5 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB992C8A8F249851F36FDC6 /* NSMutableAttributedString.swift */; };
 		2DB99E3B2B1F8771227876EB /* WissEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB992DD0BCAABABFEFDC0DD /* WissEquatable.swift */; };
 		2DB99E7ABA9E927638D0A5DC /* UIScreen+Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99DDB26E7BCEDAEEAD47E /* UIScreen+Wiss.swift */; };
 		2DB99EA4B19B65F252567087 /* Wiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D371107BD05306F9A6B /* Wiss.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		2DB99155F6B2349B905DAE97 /* UILabel+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Wiss.swift"; sourceTree = "<group>"; };
 		2DB99299EABDF39464603ED8 /* CellModelRetainedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellModelRetainedCell.swift; sourceTree = "<group>"; };
+		2DB992C8A8F249851F36FDC6 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 		2DB992DD0BCAABABFEFDC0DD /* WissEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissEquatable.swift; sourceTree = "<group>"; };
 		2DB9934E17AC4B9844803F20 /* String+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Wiss.swift"; sourceTree = "<group>"; };
 		2DB9939044A757C154705920 /* UIView+Wiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Wiss.swift"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				2DB99BFA7ABE7DC2E3778B61 /* NSAttributedString+Wiss.swift */,
 				2DB999B047FDF76A9CFCF031 /* UIColor+WissExtension.swift */,
 				2DB9953BA5CF364FAAD4C512 /* UIFont+Wiss.swift */,
+				2DB992C8A8F249851F36FDC6 /* NSMutableAttributedString.swift */,
 			);
 			path = PrimitiveType;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				2DB99B283F8A16CBCF4C00B7 /* CellModelRetainedCell.swift in Sources */,
 				2DB9910872A717A0EC588247 /* Codable+WissExtension.swift in Sources */,
 				2DB992CD27F3AEDF7FC298F7 /* Hashable+Extension.swift in Sources */,
+				2DB99E06B3E58F2F3033C5F5 /* NSMutableAttributedString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
