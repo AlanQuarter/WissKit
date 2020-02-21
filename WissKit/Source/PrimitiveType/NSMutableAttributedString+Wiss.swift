@@ -21,17 +21,6 @@ extension Wiss where WissBase: NSMutableAttributedString {
     }
 
 
-    public func add(textColor: UIColor, range: NSRange? = nil) {
-        let actualRange = range ?? self.base.string.wiss.wholeNsRange
-
-        guard actualRange.length > 0 else {
-            return
-        }
-
-        self.base.addAttribute(.foregroundColor, value: textColor, range: actualRange)
-    }
-
-
     public func add(alignment: NSTextAlignment, range: NSRange? = nil) {
         var actualRange = range ?? self.base.string.wiss.wholeNsRange
 
@@ -92,6 +81,28 @@ extension Wiss where WissBase: NSMutableAttributedString {
 
         paragraphStyle.lineHeightMultiple = self.base.wiss.lineHeightMultiple(for: lineHeight)
         self.base.addAttribute(.paragraphStyle, value: paragraphStyle, range: actualRange)
+    }
+
+
+    public func add(textColor: UIColor, range: NSRange? = nil) {
+        let actualRange = range ?? self.base.string.wiss.wholeNsRange
+
+        guard actualRange.length > 0 else {
+            return
+        }
+
+        self.base.addAttribute(.foregroundColor, value: textColor, range: actualRange)
+    }
+
+
+    public func add(letterSpacing: CGFloat, range: NSRange? = nil) {
+        let actualRange = range ?? self.base.string.wiss.wholeNsRange
+
+        guard actualRange.length > 0 else {
+            return
+        }
+
+        self.base.addAttribute(.kern, value: letterSpacing, range: actualRange)
     }
 
 }
