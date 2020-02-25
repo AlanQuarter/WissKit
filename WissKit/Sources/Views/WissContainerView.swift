@@ -31,8 +31,8 @@ public class WissContainerView<ContentView: UIView>: UIView {
     }
 
 
-    public convenience init(contentInsets: UIEdgeInsets, contentViewMaker: () -> ContentView) {
-        self.init(contentInsets: contentInsets, contentView: contentViewMaker())
+    public convenience init(contentInsets: UIEdgeInsets, contentViewBuilder: () -> ContentView) {
+        self.init(contentInsets: contentInsets, contentView: contentViewBuilder())
     }
 
     
