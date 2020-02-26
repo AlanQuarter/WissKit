@@ -12,14 +12,14 @@ public class WissContainerView<ContentView: UIView>: UIView {
 
     public weak var contentView: ContentView! {
         didSet  {
-            self.refreshView()
+            self.refresh(self.contentView)
         }
     }
 
 
     public var contentInsets = UIEdgeInsets.zero {
         didSet {
-            self.refreshView()
+            self.refreshView(self.contentView)
         }
     }
 
@@ -41,21 +41,21 @@ public class WissContainerView<ContentView: UIView>: UIView {
     }
 
 
-    private func refreshView() {
-        guard let contentView = self.contentView else {
+    func refresh(_ contentView: ContentView?) {
+        guard let view = contentView else {
             return
         }
 
-        for view in self.subviews {
-            view.removeFromSuperview()
+        for subview in self.subviews {
+            subview.removeFromSuperview()
         }
 
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addSubview(contentView)
+        self.addSubview(view)
 
         NSLayoutConstraint(
-                item: contentView,
+                item: view,
                 attribute: .leading,
                 relatedBy: .equal,
                 toItem: self,
@@ -65,7 +65,7 @@ public class WissContainerView<ContentView: UIView>: UIView {
         ).isActive = true
 
         NSLayoutConstraint(
-                item: contentView,
+                item: view,
                 attribute: .trailing,
                 relatedBy: .equal,
                 toItem: self,
@@ -75,7 +75,7 @@ public class WissContainerView<ContentView: UIView>: UIView {
         ).isActive = true
 
         NSLayoutConstraint(
-                item: contentView,
+                item: view,
                 attribute: .top,
                 relatedBy: .equal,
                 toItem: self,
@@ -85,7 +85,7 @@ public class WissContainerView<ContentView: UIView>: UIView {
         ).isActive = true
 
         NSLayoutConstraint(
-                item: contentView,
+                item: view,
                 attribute: .bottom,
                 relatedBy: .equal,
                 toItem: self,
