@@ -10,24 +10,16 @@ import UIKit
 
 public class WissContainerView<ContentView: UIView>: UIView {
 
-    public weak var contentView: ContentView! {
-        didSet  {
-            self.refresh(self.contentView)
-        }
-    }
+    public private(set) var contentInsets = UIEdgeInsets.zero
 
-
-    public var contentInsets = UIEdgeInsets.zero {
-        didSet {
-            self.refresh(self.contentView)
-        }
-    }
+    public private(set) weak var contentView: ContentView!
 
 
     public init(contentInsets: UIEdgeInsets, contentView: ContentView) {
         super.init(frame: .zero)
+
         self.contentInsets = contentInsets
-        self.contentView = contentView
+        self.set(contentView: contentView)
     }
 
 
@@ -41,21 +33,37 @@ public class WissContainerView<ContentView: UIView>: UIView {
     }
 
 
-    func refresh(_ contentView: ContentView?) {
-        guard let view = contentView else {
-            return
-        }
+    public func set(contentInsets: UIEdgeInsets, animated: Bool = false, completion: @escaping (Bool) -> Void = { _ in }) {
+        self.contentInsets = contentInsets
 
+        if animated {
+            self.layoutIfNeeded()
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.set(contentView: strongSelf.contentView)
+                strongSelf.layoutIfNeeded()
+            }, completion: completion)
+        } else {
+            self.set(contentView: self.contentView)
+            completion(true)
+        }
+    }
+
+
+    public func set(contentView: ContentView) {
         for subview in self.subviews {
             subview.removeFromSuperview()
         }
 
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.addSubview(view)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentView)
+        self.contentView = contentView
 
         NSLayoutConstraint(
-                item: view,
+                item: contentView,
                 attribute: .leading,
                 relatedBy: .equal,
                 toItem: self,
@@ -65,7 +73,7 @@ public class WissContainerView<ContentView: UIView>: UIView {
         ).isActive = true
 
         NSLayoutConstraint(
-                item: view,
+                item: contentView,
                 attribute: .trailing,
                 relatedBy: .equal,
                 toItem: self,
@@ -75,7 +83,7 @@ public class WissContainerView<ContentView: UIView>: UIView {
         ).isActive = true
 
         NSLayoutConstraint(
-                item: view,
+                item: contentView,
                 attribute: .top,
                 relatedBy: .equal,
                 toItem: self,
@@ -85,7 +93,7 @@ public class WissContainerView<ContentView: UIView>: UIView {
         ).isActive = true
 
         NSLayoutConstraint(
-                item: view,
+                item: contentView,
                 attribute: .bottom,
                 relatedBy: .equal,
                 toItem: self,
@@ -93,6 +101,11 @@ public class WissContainerView<ContentView: UIView>: UIView {
                 multiplier: 1,
                 constant: -self.contentInsets.bottom
         ).isActive = true
+    }
+
+
+    public func set(contentView contentViewBuilder: () -> ContentView) {
+        self.set(contentView: contentViewBuilder())
     }
 
 }
