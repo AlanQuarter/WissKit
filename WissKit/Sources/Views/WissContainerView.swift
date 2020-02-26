@@ -19,7 +19,7 @@ public class WissContainerView<ContentView: UIView>: UIView {
 
     public var contentInsets = UIEdgeInsets.zero {
         didSet {
-            self.refreshView(self.contentView)
+            self.refresh(self.contentView)
         }
     }
 
