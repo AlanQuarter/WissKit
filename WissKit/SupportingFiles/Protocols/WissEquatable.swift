@@ -41,8 +41,6 @@ extension UInt32: WissEquatable {}
 extension UInt64: WissEquatable {}
 
 extension Float: WissEquatable {}
-extension Float80: WissEquatable {}
-
 extension Double: WissEquatable {}
 
 extension String: WissEquatable {}
