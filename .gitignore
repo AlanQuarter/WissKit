@@ -1,3 +1,5 @@
 .idea
 WissKit.xcodeproj/project.xcworkspace/xcuserdata
 WissKit.xcodeproj/xcuserdata
+.swiftpm/xcode/xcuserdata
+.swiftpm/xcode/package.xcworkspace/xcuserdata
