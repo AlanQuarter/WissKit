@@ -4,6 +4,8 @@
 //
 
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 
@@ -40,3 +42,5 @@ extension Wiss where WissBase: NSAttributedString {
     }
 
 }
+
+#endif

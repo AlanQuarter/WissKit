@@ -4,6 +4,8 @@
 //
 
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 
@@ -15,3 +17,5 @@ extension CGFloat {
     }
 
 }
+
+#endif

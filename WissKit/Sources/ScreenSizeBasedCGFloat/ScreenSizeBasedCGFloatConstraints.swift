@@ -4,6 +4,8 @@
 //
 
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 
@@ -63,3 +65,5 @@ public class ScreenSizeBasedCGFloatConstraints {
     }
 
 }
+
+#endif

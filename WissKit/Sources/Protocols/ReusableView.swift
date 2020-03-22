@@ -4,6 +4,8 @@
 //
 
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 
@@ -24,3 +26,5 @@ extension UITableViewCell: ReusableView {}
 extension UITableViewHeaderFooterView: ReusableView {}
 
 extension UICollectionReusableView: ReusableView {}
+
+#endif

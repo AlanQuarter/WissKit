@@ -4,6 +4,8 @@
 //
 
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 
@@ -109,3 +111,5 @@ public class WissContainerView<ContentView: UIView>: UIView {
     }
 
 }
+
+#endif
