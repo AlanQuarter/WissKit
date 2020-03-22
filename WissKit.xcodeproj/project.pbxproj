@@ -70,7 +70,7 @@
 		E737A65324274FC20030D360 /* Hashable+WissExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hashable+WissExtension.swift"; sourceTree = "<group>"; };
 		E737A65524274FEE0030D360 /* WissKitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissKitError.swift; sourceTree = "<group>"; };
 		E737A657242750110030D360 /* WissEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WissEquatable.swift; sourceTree = "<group>"; };
-		E737A6592427504A0030D360 /* WissKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; path = WissKit.podspec; sourceTree = SOURCE_ROOT; };
+		E737A6592427504A0030D360 /* WissKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = WissKit.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +448,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wiss.WissKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -474,6 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wiss.WissKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
