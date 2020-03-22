@@ -1,5 +1,8 @@
 //
-//  Created by Alan on 2020/02/04.
+//  ViewController.swift
+//  WissKitExample
+//
+//  Created by Alan on 2020/03/20.
 //  Copyright © 2020 Wiss. All rights reserved.
 //
 
