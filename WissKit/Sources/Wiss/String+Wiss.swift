@@ -93,6 +93,19 @@ extension Wiss where WissBase == String {
 }
 
 
+extension Wiss where WissBase == String {
+
+    public func match(_ pattern: String) -> Bool {
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            return false
+        }
+
+        return regex.numberOfMatches(in: self.base, range: self.wholeNsRange) > 0
+    }
+
+}
+
+
 extension WissStoreKey {
 
     fileprivate static var wiss_defaultLocalizationLanguage: WissStoreKey<String?> {
