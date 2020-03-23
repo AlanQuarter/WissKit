@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2DB992E95B101C1FF2C1B9E3 /* ANSIAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB999E98E554D42CE61F36C /* ANSIAttributedString.swift */; };
-		2DB993BF5A2DB1B97F6756AE /* ANSITextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99D4F9B55EC8DC302D2DD /* ANSITextStyle.swift */; };
 		2DB996F40D3EC5263BFC2EBE /* ANSIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB994FFC51631EFF235D1F8 /* ANSIColor.swift */; };
 		E737A58F2424B8E10030D360 /* WissKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E737A58D2424B8E10030D360 /* WissKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E737A62024274CC40030D360 /* WissError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E737A61C24274CC40030D360 /* WissError.swift */; };
@@ -44,7 +43,6 @@
 /* Begin PBXFileReference section */
 		2DB994FFC51631EFF235D1F8 /* ANSIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANSIColor.swift; sourceTree = "<group>"; };
 		2DB999E98E554D42CE61F36C /* ANSIAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANSIAttributedString.swift; sourceTree = "<group>"; };
-		2DB99D4F9B55EC8DC302D2DD /* ANSITextStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANSITextStyle.swift; sourceTree = "<group>"; };
 		E737A58A2424B8E10030D360 /* WissKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WissKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E737A58D2424B8E10030D360 /* WissKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WissKit.h; sourceTree = "<group>"; };
 		E737A58E2424B8E10030D360 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 			children = (
 				2DB994FFC51631EFF235D1F8 /* ANSIColor.swift */,
 				2DB999E98E554D42CE61F36C /* ANSIAttributedString.swift */,
-				2DB99D4F9B55EC8DC302D2DD /* ANSITextStyle.swift */,
 			);
 			path = ANSIAttributedString;
 			sourceTree = "<group>";
@@ -320,7 +317,6 @@
 				E737A63B24274E0F0030D360 /* UIWindow+Wiss.swift in Sources */,
 				2DB996F40D3EC5263BFC2EBE /* ANSIColor.swift in Sources */,
 				2DB992E95B101C1FF2C1B9E3 /* ANSIAttributedString.swift in Sources */,
-				2DB993BF5A2DB1B97F6756AE /* ANSITextStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
