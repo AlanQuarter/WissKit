@@ -17,8 +17,47 @@ public struct ANSIAttributedString {
     public var backgroundColor: ANSIColor? = nil
 
 
-    init(string: String) {
+    public init(string: String) {
         self.string = string
+    }
+
+}
+
+
+extension ANSIAttributedString {
+
+    public func bold(_ bold: Bool = true) -> ANSIAttributedString {
+        var newString = self
+        newString.isBold = bold
+        return newString
+    }
+
+
+    public func italic(_ italic: Bool = true) -> ANSIAttributedString {
+        var newString = self
+        newString.isItalic = italic
+        return newString
+    }
+
+
+    public func underlined(_ underlined: Bool = true) -> ANSIAttributedString {
+        var newString = self
+        newString.isUnderlined = underlined
+        return newString
+    }
+
+
+    public func textColored(_ color: ANSIColor) -> ANSIAttributedString {
+        var newString = self
+        newString.textColor = color
+        return newString
+    }
+
+
+    public func backgroundColored(_ color: ANSIColor) -> ANSIAttributedString {
+        var newString = self
+        newString.backgroundColor = color
+        return newString
     }
 
 }
