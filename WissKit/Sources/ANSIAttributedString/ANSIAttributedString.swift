@@ -30,6 +30,18 @@ public struct ANSIAttributedString {
         }
     }
 
+
+    public func added(_ attributes: ANSIAttribute...) -> ANSIAttributedString {
+        self.added(attributes)
+    }
+
+
+    public func added(_ attributes: [ANSIAttribute]) -> ANSIAttributedString {
+        var result = self
+        result.add(attributes)
+        return result
+    }
+
 }
 
 
